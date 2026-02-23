@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surgical Consult Agent — Christopher Stephenson, MD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Surgical Consult Agent</h1>
+      <p class="tagline">An AI co-pilot that pulls patient data from the EHR and helps surgery residents work up consults in minutes, not hours.</p>
+      <p class="byline">Built by <strong>Christopher Stephenson, MD</strong></p>
+      <div class="hero-links">
+        <a href="https://github.com/cas23d/surgical-consult-agent" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Case Selector -->
+  <section class="case-selector">
+    <h2>Interactive Demo</h2>
+    <p class="case-instructions">Select a case to see the agent in action. Chart data loads on the left; AI analysis streams on the right.</p>
+    <div class="case-buttons">
+      <button class="case-btn" data-case="case1" onclick="loadCase('case1')">
+        <span class="case-label">Case 1</span>
+        <span class="case-title">Perforated Diverticulitis</span>
+        <span class="case-desc">68M with free air on CT — surgical emergency</span>
+      </button>
+      <button class="case-btn" data-case="case2" onclick="loadCase('case2')">
+        <span class="case-label">Case 2</span>
+        <span class="case-title">Ischemic Colitis</span>
+        <span class="case-desc">72M on anticoagulation with hemodynamic instability</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Consult Page Banner -->
+  <div class="consult-banner" id="consult-banner" style="display:none">
+    <span class="consult-icon">📟</span>
+    <span class="consult-text" id="consult-message"></span>
+  </div>
+
+  <!-- Demo Area -->
+  <section class="demo" id="demo" style="display:none">
+    <div class="demo-container">
+
+      <!-- Left: EHR Chart -->
+      <div class="panel chart-panel">
+        <div class="panel-header">
+          <span class="panel-icon">🏥</span> Patient Chart (EHR)
+        </div>
+        <div class="chart-content" id="chart-content"></div>
+      </div>
+
+      <!-- Right: Agent Output -->
+      <div class="panel agent-panel">
+        <div class="panel-header">
+          <span class="panel-icon">🤖</span> Consult Agent
+        </div>
+        <div class="key-findings-banner" id="key-findings-banner" style="display:none"></div>
+        <div class="stage-tabs">
+          <button class="stage-tab active" data-stage="triage" onclick="showStage('triage')">Triage</button>
+          <button class="stage-tab" data-stage="context" onclick="showStage('context')">Gaps</button>
+          <button class="stage-tab" data-stage="plan" onclick="showStage('plan')">Plan</button>
+          <button class="stage-tab" data-stage="note" onclick="showStage('note')">Final Note</button>
+        </div>
+        <div class="agent-content" id="agent-content">
+          <div class="stage-content" id="stage-triage"></div>
+          <div class="stage-content" id="stage-context" style="display:none"></div>
+          <div class="stage-content" id="stage-plan" style="display:none"></div>
+          <div class="stage-content" id="stage-note" style="display:none">
+            <div class="note-view-toggle" id="note-view-toggle" style="display:none">
+              <button class="toggle-btn active" data-view="summary" onclick="toggleNoteView('summary')">Summary</button>
+              <button class="toggle-btn" data-view="full" onclick="toggleNoteView('full')">Full Note</button>
+            </div>
+            <div class="note-content" id="note-content"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Resident Input Display -->
+  <section class="resident-input-section" id="resident-section" style="display:none">
+    <div class="resident-input-box">
+      <div class="resident-header">👨‍⚕️ Resident Exam Findings</div>
+      <div class="resident-text" id="resident-text"></div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="workflow-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Consult page arrives</strong>
+          <p>Resident receives consult with patient MRN and reason</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Agent pulls chart via FHIR</strong>
+          <p>Vitals, labs, imaging, meds, notes — all pulled automatically</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>AI analyzes the case</strong>
+          <p>Triage, red flags, gaps in management, evidence-based plan</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>Outputs ready</strong>
+          <p>Consult note, staffing summary, and follow-up tasks</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design Principles -->
+  <section class="principles">
+    <h2>Design Principles</h2>
+    <div class="principle-grid">
+      <div class="principle">
+        <h3>Eyes and ears, not autopilot</h3>
+        <p>The agent surfaces what the resident might miss at 2 AM — it doesn't make decisions. The clinician stays in the loop.</p>
+      </div>
+      <div class="principle">
+        <h3>Guideline-transparent</h3>
+        <p>Every recommendation cites the specific guideline and society. When a guideline doesn't apply cleanly, the agent says so.</p>
+      </div>
+      <div class="principle">
+        <h3>Built for messy reality</h3>
+        <p>Residents type in shorthand. Chart data is incomplete. Radiology reads can be wrong. The agent handles all of it.</p>
+      </div>
+      <div class="principle">
+        <h3>No frameworks, no magic</h3>
+        <p>Raw API calls to Claude via the Anthropic SDK. FHIR R4 for EHR data. Every line of code is readable and auditable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video placeholder -->
+  <section class="video-section" id="video-section">
+    <h2>Demo Walkthrough</h2>
+    <div class="video-placeholder">
+      <p>Video coming soon — a narrated walkthrough of a real surgical consult using the agent.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Christopher Stephenson, MD · Surgical Consult Agent · 2026</p>
+    <p class="footer-tech">Python · Anthropic Claude API · FHIR R4 · HAPI FHIR</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

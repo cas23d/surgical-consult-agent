@@ -1,0 +1,5 @@
+{
+  "patient_id": "131283452",
+  "mrn": "007281944",
+  "fhir_base": "https://hapi.fhir.org/baseR4"
+}
