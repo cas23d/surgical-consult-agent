@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surgical Consult Agent — Christopher Stephenson, MD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,8 +18,8 @@
       <p class="tagline">An AI co-pilot that pulls patient data from the EHR and helps surgery residents work up consults in minutes, not hours.</p>
       <p class="byline">Built by <strong>Christopher Stephenson, MD</strong></p>
       <div class="hero-links">
-        <a href="https://github.com/cas23d/surgical-consult-agent" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/christopher-stephenson-md" target="_blank">LinkedIn</a>
+        <a href="https://github.com/cas23d/surgical-consult-agent" target="_blank" class="btn-primary">GitHub</a>
+        <a href="https://www.linkedin.com/in/christopher-stephenson-md" target="_blank" class="btn-outline">LinkedIn</a>
       </div>
     </div>
   </header>
@@ -27,12 +30,18 @@
     <p class="case-instructions">Select a case to see the agent in action. Chart data loads on the left; AI analysis streams on the right.</p>
     <div class="case-buttons">
       <button class="case-btn" data-case="case1" onclick="loadCase('case1')">
-        <span class="case-label">Case 1</span>
+        <span class="case-top-row">
+          <span class="case-label">Case 1</span>
+          <span class="acuity-dot red">Emergent</span>
+        </span>
         <span class="case-title">Perforated Diverticulitis</span>
         <span class="case-desc">68M with free air on CT — surgical emergency</span>
       </button>
       <button class="case-btn" data-case="case2" onclick="loadCase('case2')">
-        <span class="case-label">Case 2</span>
+        <span class="case-top-row">
+          <span class="case-label">Case 2</span>
+          <span class="acuity-dot red">Urgent</span>
+        </span>
         <span class="case-title">Ischemic Colitis</span>
         <span class="case-desc">72M on anticoagulation with hemodynamic instability</span>
       </button>
@@ -41,7 +50,7 @@
 
   <!-- Consult Page Banner -->
   <div class="consult-banner" id="consult-banner" style="display:none">
-    <span class="consult-icon">📟</span>
+    <span class="consult-icon">CONSULT</span>
     <span class="consult-text" id="consult-message"></span>
   </div>
 
@@ -52,7 +61,7 @@
       <!-- Left: EHR Chart -->
       <div class="panel chart-panel">
         <div class="panel-header">
-          <span class="panel-icon">🏥</span> Patient Chart (EHR)
+          <span class="panel-badge emr">EMR</span> Patient Chart
         </div>
         <div class="chart-content" id="chart-content"></div>
       </div>
@@ -60,7 +69,7 @@
       <!-- Right: Agent Output -->
       <div class="panel agent-panel">
         <div class="panel-header">
-          <span class="panel-icon">🤖</span> Consult Agent
+          <span class="panel-badge ai">AI</span> Consult Agent
         </div>
         <div class="key-findings-banner" id="key-findings-banner" style="display:none"></div>
         <div class="stage-tabs">
@@ -89,7 +98,7 @@
   <!-- Resident Input Display -->
   <section class="resident-input-section" id="resident-section" style="display:none">
     <div class="resident-input-box">
-      <div class="resident-header">👨‍⚕️ Resident Exam Findings</div>
+      <div class="resident-header"><span class="panel-badge exam">EXAM</span> Resident Exam Findings</div>
       <div class="resident-text" id="resident-text"></div>
     </div>
   </section>
@@ -105,7 +114,7 @@
           <p>Resident receives consult with patient MRN and reason</p>
         </div>
       </div>
-      <div class="step-arrow">→</div>
+      <div class="step-connector"><span class="connector-line"></span></div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-text">
@@ -113,7 +122,7 @@
           <p>Vitals, labs, imaging, meds, notes — all pulled automatically</p>
         </div>
       </div>
-      <div class="step-arrow">→</div>
+      <div class="step-connector"><span class="connector-line"></span></div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-text">
@@ -121,7 +130,7 @@
           <p>Triage, red flags, gaps in management, evidence-based plan</p>
         </div>
       </div>
-      <div class="step-arrow">→</div>
+      <div class="step-connector"><span class="connector-line"></span></div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-text">
@@ -166,7 +175,12 @@
   <!-- Footer -->
   <footer>
     <p>Christopher Stephenson, MD · Surgical Consult Agent · 2026</p>
-    <p class="footer-tech">Python · Anthropic Claude API · FHIR R4 · HAPI FHIR</p>
+    <div class="footer-tech">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">Anthropic Claude API</span>
+      <span class="tech-pill">FHIR R4</span>
+      <span class="tech-pill">HAPI FHIR</span>
+    </div>
   </footer>
 
   <script src="app.js"></script>
