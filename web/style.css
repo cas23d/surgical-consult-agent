@@ -374,6 +374,12 @@ footer { animation-delay: 0.25s; }
   border: 1px solid rgba(210, 153, 34, 0.3);
 }
 
+.acuity-dot.orange {
+  background: rgba(227, 134, 31, 0.15);
+  color: #e3861f;
+  border: 1px solid rgba(227, 134, 31, 0.3);
+}
+
 .case-title {
   display: block;
   font-size: 1.15rem;

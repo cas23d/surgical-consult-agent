@@ -138,6 +138,7 @@ function isAbnormal(labString) {
     /INR:\s*(1\.[3-9]|[2-9])/,        // INR > 1.3
     /Hemoglobin:\s*([0-9]|1[01])\./,   // Hgb < 12
     /Hemoglobin:\s*9\.\d/,             // Hgb 9.x
+    /aPTT:\s*(8[0-9]|9\d|\d{3})/,     // aPTT > 80 (supratherapeutic)
   ];
   return abnormals.some(re => re.test(labString));
 }
