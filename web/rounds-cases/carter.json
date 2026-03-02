@@ -1,0 +1,168 @@
+{
+  "patient_id": "rounds-carter",
+  "name": "James Carter",
+  "age_sex": "71M",
+  "location": "8W-816A",
+  "summary": "POD#5 open R hemicolectomy — obstructing colon CA (pT3N1b)",
+  "acuity": "yellow",
+  "overnight_summary": "Drain output changed, WBC spike, new lactate 3.8 — concern for anastomotic leak",
+  "chart": {
+    "patient": {
+      "name": "James Carter",
+      "mrn": "5519032",
+      "dob": "03/14/1954",
+      "gender": "male",
+      "age": "71",
+      "admit_date": "02/21/2026",
+      "hospital_day": "10",
+      "code_status": "Full Code"
+    },
+    "encounter": {
+      "location": "8W-816A",
+      "reason": "s/p open right hemicolectomy for obstructing hepatic flexure adenocarcinoma, POD#5",
+      "service": "General Surgery",
+      "attending": "Stephenson, MD"
+    },
+    "conditions": [
+      "Adenocarcinoma of colon, hepatic flexure (pT3N1b) — s/p right hemicolectomy 02/25",
+      "Type 2 diabetes mellitus (A1c 8.4%, Jan 2026)",
+      "Hypertension",
+      "CKD stage 3 (baseline Cr 1.4–1.6)",
+      "COPD (40 pack-year history, quit 2018)",
+      "Hyperlipidemia"
+    ],
+    "allergies": [
+      "Lisinopril – cough",
+      "No known antibiotic allergies"
+    ],
+    "vitals": [
+      "03/02 0605 — T 38.2°C  HR 118  BP 98/60  RR 22  SpO2 94% on 2L NC",
+      "03/02 0200 — T 37.9°C  HR 112  BP 104/64  RR 20  SpO2 92% RA → placed on 2L NC",
+      "03/01 2200 — T 37.6°C  HR 105  BP 110/68  RR 18  SpO2 95% RA"
+    ],
+    "labs": [
+      "WBC: 19.4 10*3/uL",
+      "Hemoglobin: 8.9 g/dL",
+      "Platelets: 178 10*3/uL",
+      "Sodium: 131 mEq/L",
+      "Potassium: 4.8 mEq/L",
+      "Chloride: 98 mEq/L",
+      "CO2: 20 mEq/L",
+      "BUN: 34 mg/dL",
+      "Creatinine: 2.3 mg/dL",
+      "Glucose: 244 mg/dL",
+      "Lactate: 3.8 mmol/L"
+    ],
+    "medications": {
+      "home": [
+        "Metformin 1000mg BID (held — surgery/AKI)",
+        "Amlodipine 10mg daily (held — hypotension)",
+        "Metoprolol succinate 50mg daily (converted to tartrate 25mg BID inpatient)",
+        "Tiotropium inhaler daily",
+        "Aspirin 81mg daily (held — perioperative)"
+      ],
+      "inpatient": [
+        "Piperacillin-tazobactam 3.375g IV q6h (started 03/02 0600)",
+        "Enoxaparin 40mg SQ daily (last given 03/01 0900)",
+        "Metoprolol tartrate 25mg PO BID (HELD 03/02 — BP 98/60)",
+        "Insulin sliding scale",
+        "Hydromorphone 0.4mg IV q4h PRN",
+        "Ondansetron 4mg IV q6h PRN",
+        "Pantoprazole 40mg IV daily",
+        "Acetaminophen 1g IV q6h"
+      ]
+    },
+    "imaging": [
+      {
+        "study": "CT Abdomen/Pelvis with IV contrast (02/21/2026 — Admission)",
+        "status": "final",
+        "findings": "Circumferential mass at hepatic flexure causing near-complete large bowel obstruction. Proximal small bowel dilation to 4.2 cm. No free air. No definitive liver metastases. No ascites. Mild bilateral lower lobe atelectasis."
+      }
+    ],
+    "notes": [
+      {
+        "type": "Social History",
+        "text": "Retired auto mechanic. Lives with wife Margaret. 40-pack-year smoking history (1 PPD x 40 years), quit 2018. Social alcohol — 2-3 beers on weekends. No illicit drugs. Daughter Sarah is healthcare power of attorney. Contact: 555-0142."
+      },
+      {
+        "type": "ED Presentation Note (02/21)",
+        "text": "CC: Abdominal pain and vomiting\n\nHPI: 3 days worsening right-sided abdominal pain. Nausea, bilious emesis x4. No BM x4 days. Decreased PO intake. Reports 15 lb unintentional weight loss over 3 months.\n\nED Vitals: T 37.2 HR 108 BP 146/82 RR 18 SpO2 97% RA\nLabs: WBC 14.2, Hgb 11.2, Na 133, Cr 1.7, Lactate 2.4\n\nCT: Circumferential mass hepatic flexure, near-complete obstruction, SB dilation 4.2cm, no free air, no liver mets.\n\nAdmitted to General Surgery."
+      },
+      {
+        "type": "Surgery Consult Note (02/21)",
+        "text": "Assessment: Large bowel obstruction secondary to suspected malignancy at hepatic flexure.\n\nPlan:\n- NPO\n- NG tube to low intermittent suction\n- IVF resuscitation\n- CEA level\n- Plan for operative intervention once decompressed"
+      },
+      {
+        "type": "NG Tube Flowsheet",
+        "text": "02/22: 1,200 mL bilious\n02/23: 950 mL\n02/24: 600 mL — decreasing, decompressed, cleared for OR"
+      },
+      {
+        "type": "Pre-operative Labs (02/24)",
+        "text": "WBC 12.8, Hgb 11.0, Plt 268\nNa 135, K 4.2, Cr 1.6, Glucose 188\nType and Screen: Active\nCEA: 14.2 ng/mL (elevated, normal <5.0)"
+      },
+      {
+        "type": "Operative Note (02/25)",
+        "text": "Preoperative Dx: Obstructing right colon mass\nPostoperative Dx: Same\nProcedure: Open right hemicolectomy with primary stapled ileocolic anastomosis\n\nFindings: Dilated small bowel. No gross peritoneal carcinomatosis. Liver palpated — no obvious lesions. Tumor at hepatic flexure, ~5cm. Lateral-to-medial mobilization. Ileocolic vessels ligated. Specimen removed en bloc.\n\nAnastomosis: Side-to-side functional end-to-end stapled ileocolic anastomosis. Well-perfused, intact staple lines. Air leak test negative.\n\nDrain: 19Fr Blake placed in right paracolic gutter.\nClosure: Fascia closed running #1 PDS. Skin stapled.\nEBL: 400mL. Fluids: 3.2L crystalloid. UOP intraop: 250mL.\nComplications: None. Extubated, to PACU in stable condition."
+      },
+      {
+        "type": "Anesthesia Summary (02/25)",
+        "text": "ASA Class III. General endotracheal anesthesia. Phenylephrine boluses x3 for transient hypotension during splenic flexure mobilization. Total IVF 3.2L LR. EBL 400mL. No transfusion required. Extubated without difficulty."
+      },
+      {
+        "type": "Pathology Report (Final, resulted 03/01)",
+        "text": "Specimen: Right colon resection\n\nGross: 22cm segment of colon with 5.2cm circumferential mass at hepatic flexure\n\nMicroscopic: Moderately differentiated adenocarcinoma\nDepth: Invades through muscularis propria into pericolonic adipose tissue\nMargins: Proximal, distal, and radial margins negative\nLymphovascular invasion: Present\nPerineural invasion: Not identified\nLymph nodes: 3 of 12 examined positive for metastatic carcinoma\n\nKRAS: Pending\nMSI: Pending\n\nPathologic Stage: pT3 N1b Mx"
+      },
+      {
+        "type": "Progress Notes (POD1–POD4)",
+        "text": "POD1 (02/26):\nS: Incisional pain 6/10. No flatus. Nausea controlled with ondansetron.\nO: T 37.4, HR 92, BP 126/74. Abdomen mildly distended, soft, no peritoneal signs. Incision c/d/i. Drain: 150mL serous.\nLabs: WBC 15.8, Hgb 10.4, Cr 1.8\nA/P: Expected post-op course. Continue IVF, NPO, IS q1h, DVT prophylaxis, pain management.\n\nPOD3 (02/28):\nS: Passing minimal flatus. Tolerating sips. Pain improving 4/10.\nO: T 37.2, HR 88, BP 130/78. Abdomen distended but soft. BS present. Drain: 80mL serosanguinous. NG removed POD2.\nLabs: WBC 13.4, Hgb 9.8, Cr 1.6\nA/P: Improving. Start clear liquids. Continue IS, ambulation, DVT prophylaxis.\n\nPOD4 (03/01):\nS: Bloating. Minimal appetite — took 30% of lunch tray, refused dinner. Feeling \"weak.\"\nO: T 37.6, HR 105, BP 110/68. Abdomen distended, tympanitic. Drain: 45mL serosanguinous.\nLabs: WBC 13.1, Hgb 9.4, Cr 1.8\nA/P: Concerning for prolonged ileus. HR creeping up. Continue diet as tolerated. Encourage ambulation. Monitor WBC — if rising, consider CT. Drain remains. Repeat labs AM. Path results expected."
+      },
+      {
+        "type": "Vitals Trend (Post-operative)",
+        "text": "Pre-op (02/24): T 37.0  HR 88   BP 132/76  RR 16  SpO2 97% RA\nPOD1   (02/26): T 37.4  HR 92   BP 126/74  RR 18  SpO2 96% RA\nPOD3   (02/28): T 37.2  HR 88   BP 130/78  RR 16  SpO2 97% RA\nPOD4   (03/01): T 37.6  HR 105  BP 110/68  RR 18  SpO2 95% RA\nPOD5   (03/02): T 38.2  HR 118  BP 98/60   RR 22  SpO2 94% 2L NC"
+      },
+      {
+        "type": "Lab Trend",
+        "text": "Date     WBC    Hgb    Cr    Lactate  Glucose\n03/02    19.4   8.9    2.3   3.8      244\n03/01    13.1   9.4    1.8   —        218\n02/28    13.4   9.8    1.6   —        212\n02/26    15.8   10.4   1.8   —        —\nPre-op   12.8   11.0   1.6   —        188\n\nCEA: 14.2 ng/mL (resulted 02/23, normal <5.0)"
+      },
+      {
+        "type": "I&O Summary (Last 72h)",
+        "text": "03/02 (0000-0600): IVF 600mL | PO 0 | UOP 120mL (20mL/hr) | Drain 120mL\n03/01 (24h total):  IVF 2000mL | PO 240mL | UOP 680mL (28mL/hr) | Drain 45mL\n02/28 (24h total):  IVF 1500mL | PO 480mL | UOP 900mL (37.5mL/hr) | Drain 80mL\n\nTrend: UOP declining (37.5 → 28 → 20 mL/hr). PO intake declining. Drain output reversed course overnight."
+      },
+      {
+        "type": "Drain Output Log (19Fr Blake, R paracolic gutter)",
+        "text": "POD0 (02/25): 200mL — serous\nPOD1 (02/26): 150mL — serous\nPOD2 (02/27): 100mL — serosanguinous\nPOD3 (02/28): 80mL — serosanguinous\nPOD4 (03/01): 45mL — serosanguinous\nPOD5 overnight (03/02): 120mL — CLOUDY / GREENISH-BROWN\n\n** Character change + volume reversal overnight **"
+      },
+      {
+        "type": "Blood Glucose Log",
+        "text": "03/02 0100: 244 mg/dL — 6u SSI given\n03/01 1800: 218 mg/dL — 4u SSI\n03/01 1200: 198 mg/dL — 2u SSI\n03/01 0600: 186 mg/dL — 2u SSI\n02/28 1800: 212 mg/dL — 4u SSI\n02/28 0600: 176 mg/dL — 0u\n\nA1c 8.4% (Jan 2026). Metformin held since admission. Trend: escalating insulin requirements."
+      },
+      {
+        "type": "Diet & Activity Log",
+        "text": "POD1 (02/26): NPO. OOB to chair x1 with 2-person assist.\nPOD2 (02/27): NPO. Ambulated 50ft in hallway with PT assist.\nPOD3 (02/28): Clear liquids — tolerated broth and jello. Ambulated 100ft x2.\nPOD4 (03/01): Regular diet. Took 30% of lunch, refused dinner. Ambulated 50ft, reported feeling \"weak.\" Refused evening PT.\nPOD5 overnight (03/02): Did not eat — nauseous. Did not ambulate. Did not get OOB."
+      },
+      {
+        "type": "Wound Assessment (Nursing, 03/01)",
+        "text": "Midline laparotomy incision: 18 staples intact, well-approximated. Mild erythema at inferior 3cm — no drainage, no fluctuance, no dehiscence. Surrounding skin intact.\n\nDrain site (19Fr Blake, RLQ): Suture intact, dressing changed, site clean without erythema. Drain patent, connected to bulb suction."
+      },
+      {
+        "type": "Respiratory Therapy Note (03/01)",
+        "text": "Hx COPD, 40 pack-year. IS volumes: 400–600mL (goal 1500mL). Patient cooperative but fatigues quickly, takes frequent breaks. Albuterol MDI q6h PRN ordered 02/26. No wheezing on assessment. Encouraged aggressive IS use and early ambulation. Recommend CPAP evaluation if supplemental O2 requirements develop or increase."
+      },
+      {
+        "type": "Nursing Note (03/02 03:15)",
+        "text": "Overnight: Patient restless, complained of worsening abdominal pressure and nausea. O2 sat dropped to 88% at 0130 while asleep — repositioned, placed on 2L NC with improvement to 92-94%. Drain output noted cloudy/greenish-brown at 0200 — previously serosanguinous — 120mL overnight total. Notified on-call resident at 0210 who ordered stat CBC/BMP/lactate and started piperacillin-tazobactam at 0600.\n\nNo bowel movement this shift. PO intake zero — patient nauseous, declined tray. Hydromorphone 0.4mg IV x2 (pain 7/10 at 0100, 6/10 at 0430). Abdomen distended and tender per patient. BS 244 at 0100, 6u SSI given. Foley output 120mL (0000-0600)."
+      },
+      {
+        "type": "Medication Administration Record (Last 24h)",
+        "text": "Piperacillin-tazobactam 3.375g IV: 03/02 0600 ✓ (new order)\nEnoxaparin 40mg SQ: 03/01 0900 ✓ (next due 03/02 0900)\nMetoprolol tartrate 25mg PO: 03/01 0800 ✓, 03/01 2000 ✓, 03/02 0600 HELD (BP 98/60)\nHydromorphone 0.4mg IV: 03/01 1400, 03/01 2200, 03/02 0100, 03/02 0430\nOndansetron 4mg IV: 03/01 1830, 03/02 0330\nInsulin SSI: 03/01 0600 (2u), 03/01 1200 (2u), 03/01 1800 (4u), 03/02 0100 (6u)\nPantoprazole 40mg IV: 03/01 0600 ✓\nAcetaminophen 1g IV: 03/01 0600, 1200, 1800, 03/02 0000"
+      }
+    ],
+    "yesterday_plan": "Continue diet as tolerated — advance to regular if tolerating clears. Encourage ambulation, goal 4x daily with PT. Monitor WBC trend — if rising, consider CT. Drain to remain, monitor output character. DVT prophylaxis with enoxaparin. Sliding scale insulin. Repeat CBC, BMP in AM. Path results expected — discuss with patient and family when available."
+  },
+  "chart_text": "═══ PATIENT ═══\nName: James Carter\nMRN: 5519032\nDOB: 03/14/1954  |  Age: 71  |  Sex: Male\nAdmit Date: 02/21/2026  |  Hospital Day: 10\nLocation: 8W-816A\nService: General Surgery  |  Attending: Stephenson, MD\nCode Status: Full Code\n\nAllergies: Lisinopril (cough); No known antibiotic allergies\n\n═══ SOCIAL HISTORY ═══\nRetired auto mechanic. Lives with wife Margaret. 40-pack-year smoking (quit 2018). Social alcohol. Daughter Sarah is healthcare POA (555-0142).\n\n═══ PROBLEM LIST ═══\n  • Adenocarcinoma of colon, hepatic flexure (pT3N1b) — s/p right hemicolectomy 02/25\n  • Type 2 diabetes mellitus (A1c 8.4%, Jan 2026)\n  • Hypertension\n  • CKD stage 3 (baseline Cr 1.4–1.6)\n  • COPD (40 pack-year, quit 2018)\n  • Hyperlipidemia\n\n═══ VITALS (Last 24h) ═══\n  03/02 0605 — T 38.2°C  HR 118  BP 98/60   RR 22  SpO2 94% 2L NC\n  03/02 0200 — T 37.9°C  HR 112  BP 104/64  RR 20  SpO2 92% RA → 2L NC\n  03/01 2200 — T 37.6°C  HR 105  BP 110/68  RR 18  SpO2 95% RA\n\n═══ VITALS TREND (Post-op) ═══\n  Pre-op (02/24): T 37.0  HR 88   BP 132/76  RR 16  SpO2 97% RA\n  POD1   (02/26): T 37.4  HR 92   BP 126/74  RR 18  SpO2 96% RA\n  POD3   (02/28): T 37.2  HR 88   BP 130/78  RR 16  SpO2 97% RA\n  POD4   (03/01): T 37.6  HR 105  BP 110/68  RR 18  SpO2 95% RA\n  POD5   (03/02): T 38.2  HR 118  BP 98/60   RR 22  SpO2 94% 2L NC\n\n═══ CURRENT LABS (03/02) ═══\n  • WBC: 19.4 10*3/uL\n  • Hemoglobin: 8.9 g/dL\n  • Platelets: 178 10*3/uL\n  • Sodium: 131 mEq/L\n  • Potassium: 4.8 mEq/L\n  • Chloride: 98 mEq/L\n  • CO2: 20 mEq/L\n  • BUN: 34 mg/dL\n  • Creatinine: 2.3 mg/dL\n  • Glucose: 244 mg/dL\n  • Lactate: 3.8 mmol/L\n\n═══ LAB TREND ═══\n  Date     WBC    Hgb    Cr    Lactate  Glucose\n  03/02    19.4   8.9    2.3   3.8      244\n  03/01    13.1   9.4    1.8   —        218\n  02/28    13.4   9.8    1.6   —        212\n  02/26    15.8   10.4   1.8   —        —\n  Pre-op   12.8   11.0   1.6   —        188\n  CEA: 14.2 ng/mL (resulted 02/23, normal <5.0)\n\n═══ HOME MEDICATIONS ═══\n  • Metformin 1000mg BID (held)\n  • Amlodipine 10mg daily (held)\n  • Metoprolol succinate 50mg daily (converted to tartrate 25mg BID)\n  • Tiotropium inhaler daily\n  • Aspirin 81mg daily (held)\n\n═══ CURRENT ORDERS ═══\n  • Piperacillin-tazobactam 3.375g IV q6h (started 03/02 0600)\n  • Enoxaparin 40mg SQ daily (last given 03/01 0900)\n  • Metoprolol tartrate 25mg BID (HELD 03/02 — BP 98/60)\n  • Insulin sliding scale\n  • Hydromorphone 0.4mg IV q4h PRN\n  • Ondansetron 4mg IV q6h PRN\n  • Pantoprazole 40mg IV daily\n  • Acetaminophen 1g IV q6h\n\n═══ IMAGING ═══\n  [FINAL] CT Abdomen/Pelvis with IV contrast (02/21/2026)\n  Circumferential mass at hepatic flexure causing near-complete large bowel obstruction. Proximal small bowel dilation to 4.2 cm. No free air. No definitive liver metastases. No ascites. Mild bilateral lower lobe atelectasis.\n\n═══ CLINICAL NOTES ═══\n\n--- Social History ---\nRetired auto mechanic. Lives with wife Margaret. 40-pack-year smoking (1 PPD x 40 years), quit 2018. Social alcohol — 2-3 beers on weekends. No illicit drugs. Daughter Sarah is healthcare POA. Contact: 555-0142.\n\n--- ED Presentation Note (02/21) ---\nCC: Abdominal pain and vomiting\nHPI: 3 days worsening right-sided abdominal pain. Nausea, bilious emesis x4. No BM x4 days. Decreased PO intake. 15 lb unintentional weight loss over 3 months.\nVitals: T 37.2 HR 108 BP 146/82 RR 18 SpO2 97% RA\nLabs: WBC 14.2, Hgb 11.2, Na 133, Cr 1.7, Lactate 2.4\nCT: Circumferential mass hepatic flexure, near-complete obstruction.\nAdmitted to General Surgery.\n\n--- Surgery Consult (02/21) ---\nAssessment: LBO secondary to suspected malignancy.\nPlan: NPO, NG to LIS, IVF, CEA, operative intervention when decompressed.\n\n--- NG Tube Flowsheet ---\n02/22: 1,200 mL bilious\n02/23: 950 mL\n02/24: 600 mL — decompressed, cleared for OR\n\n--- Pre-op Labs (02/24) ---\nWBC 12.8, Hgb 11.0, Plt 268, Na 135, K 4.2, Cr 1.6, Glucose 188\nType and Screen: Active\nCEA: 14.2 ng/mL (elevated)\n\n--- Operative Note (02/25) ---\nProcedure: Open right hemicolectomy with stapled ileocolic anastomosis\nFindings: Dilated SB, no carcinomatosis, liver clear. 5cm tumor at hepatic flexure.\nAnastomosis: Side-to-side functional end-to-end, well-perfused, leak test negative.\nDrain: 19Fr Blake, right paracolic gutter.\nEBL: 400mL. IVF: 3.2L. UOP: 250mL. Extubated.\n\n--- Anesthesia Summary (02/25) ---\nASA III. GETA. Phenylephrine x3. IVF 3.2L LR. EBL 400mL. No complications.\n\n--- Pathology (Final, resulted 03/01) ---\nModerately differentiated adenocarcinoma, 5.2 cm\nInvades through muscularis propria into pericolonic fat\nMargins negative (proximal, distal, radial)\nLymphovascular invasion: Present\nPerineural invasion: Absent\nLymph nodes: 3/12 positive\nKRAS: Pending | MSI: Pending\nStage: pT3 N1b Mx\n\n--- POD1 Progress Note (02/26) ---\nS: Pain 6/10. No flatus.\nO: T 37.4, HR 92, BP 126/74. Mildly distended, soft. Drain 150mL serous.\nLabs: WBC 15.8, Hgb 10.4, Cr 1.8\nP: IVF, NPO, IS, DVT prophylaxis.\n\n--- POD3 Progress Note (02/28) ---\nS: Minimal flatus. Tolerating sips. Pain 4/10.\nO: T 37.2, HR 88, BP 130/78. Distended, soft, BS present. Drain 80mL serosanguinous.\nLabs: WBC 13.4, Hgb 9.8, Cr 1.6\nP: Start clears. Continue IS, ambulation.\n\n--- POD4 Progress Note (03/01) ---\nS: Bloating. Took 30% lunch, refused dinner. Weak.\nO: T 37.6, HR 105, BP 110/68. Distended, tympanitic. Drain 45mL serosanguinous.\nLabs: WBC 13.1, Hgb 9.4, Cr 1.8\nP: Continue diet. Encourage ambulation. Monitor WBC — CT if rising. Drain remains.\n\n--- I&O Summary (Last 72h) ---\n03/02 (0000-0600): IVF 600mL | PO 0 | UOP 120mL (20mL/hr) | Drain 120mL\n03/01 (24h total):  IVF 2000mL | PO 240mL | UOP 680mL (28mL/hr) | Drain 45mL\n02/28 (24h total):  IVF 1500mL | PO 480mL | UOP 900mL (37.5mL/hr) | Drain 80mL\nTrend: UOP declining. PO declining. Drain output reversed course overnight.\n\n--- Drain Output Log (19Fr Blake, R paracolic gutter) ---\nPOD0: 200mL serous\nPOD1: 150mL serous\nPOD2: 100mL serosanguinous\nPOD3: 80mL serosanguinous\nPOD4: 45mL serosanguinous\nPOD5 overnight: 120mL CLOUDY/GREENISH-BROWN — character changed\n\n--- Blood Glucose Log ---\n03/02 0100: 244 (6u SSI)\n03/01 1800: 218 (4u SSI)\n03/01 1200: 198 (2u SSI)\n03/01 0600: 186 (2u SSI)\n02/28 1800: 212 (4u SSI)\n02/28 0600: 176 (0u)\nA1c 8.4%. Metformin held. Escalating insulin requirements.\n\n--- Diet & Activity Log ---\nPOD1: NPO. OOB to chair x1 with 2-person assist.\nPOD2: NPO. Ambulated 50ft with PT.\nPOD3: Clears tolerated. Ambulated 100ft x2.\nPOD4: Regular diet. 30% lunch, refused dinner. 50ft walk, felt weak. Refused PM PT.\nPOD5 overnight: Did not eat (nauseous). Did not ambulate.\n\n--- Wound Assessment (03/01) ---\nMidline incision: 18 staples intact, well-approximated. Mild erythema inferior 3cm, no drainage, no dehiscence.\nDrain site (RLQ): Suture intact, clean, no erythema.\n\n--- Respiratory Therapy (03/01) ---\nCOPD, 40 pack-year. IS: 400-600mL (goal 1500). Fatigues quickly. Albuterol MDI q6h PRN. No wheezing. Recommend CPAP eval if O2 requirements increase.\n\n--- Nursing Note (03/02 03:15) ---\nOvernight: Restless, worsening abdominal pressure and nausea. SpO2 dropped to 88% at 0130 — placed on 2L NC (92-94%). Drain output cloudy/greenish-brown at 0200 — 120mL overnight. Notified resident 0210, ordered stat labs, started pip-tazo 0600. No BM. PO zero. Hydromorphone x2 (pain 7/10 then 6/10). Abdomen distended and tender. BS 244 at 0100, 6u SSI. Foley 120mL (0000-0600).\n\n--- Medication Administration (Last 24h) ---\nPip-tazo 3.375g IV: 03/02 0600 (new)\nEnoxaparin 40mg SQ: 03/01 0900 (next due 03/02 0900)\nMetoprolol 25mg PO: 03/01 0800, 2000 — 03/02 HELD (BP 98/60)\nHydromorphone 0.4mg IV: 03/01 1400, 2200, 03/02 0100, 0430\nOndansetron 4mg IV: 03/01 1830, 03/02 0330\nInsulin SSI: 03/01 0600 (2u), 1200 (2u), 1800 (4u), 03/02 0100 (6u)\nPantoprazole 40mg IV: 03/01 0600\nAcetaminophen 1g IV: 03/01 0600, 1200, 1800, 03/02 0000",
+  "stages": {
+    "alerts_dayplan": "## ⚠️ CRITICAL ALERTS\n\n🔴 **Drain output changed: serosanguinous → cloudy/greenish-brown, volume 45mL → 120mL overnight** — This is the most concerning finding. POD5 from ileocolic anastomosis with changed drain character and volume reversal is an anastomotic leak until proven otherwise. Need urgent CT with oral and rectal contrast.\n\n🔴 **WBC 19.4, ↑ from 13.1 yesterday** — Significant spike. Combined with fever, tachycardia, hypotension, and drain changes, this is an evolving sepsis picture from an intra-abdominal source.\n\n🔴 **Lactate 3.8 (first draw since admission)** — Elevated with hemodynamic instability. Need serial trending q4-6h to assess resuscitation response and guide decision-making.\n\n🟡 **Cr 2.3, ↑ from 1.8 (baseline 1.4–1.6)** — Worsening AKI. UOP declining: 37.5 → 28 → 20 mL/hr over 72h. Likely prerenal from sepsis/hypovolemia. If CT with contrast needed, the clinical benefit outweighs contrast risk here — bolus first.\n\n🟡 **Hgb 8.9, ↓ from 10.4 on POD1** — Steady downtrend. Type and screen should be active from pre-op. Transfuse if <7 or if heading to OR. Consider lower threshold given active sepsis.\n\n🟡 **SpO2 88% → 94% on 2L NC** — New O2 requirement. COPD with poor IS compliance (400-600mL, goal 1500). Differential: post-op atelectasis, aspiration, early pneumonia, or sepsis-related. Need CXR.\n\n🟡 **Blood glucose 186 → 244, escalating SSI (2u → 6u)** — Poorly controlled. Worsening hyperglycemia can be an early sign of sepsis and impairs anastomotic healing and immune function. Target <180 per NICE-SUGAR.\n\n🟡 **Metoprolol held — HR 118** — Appropriate given BP 98/60. Tachycardia is sepsis-driven. Treat the source, not the rate.\n\n🟡 **Enoxaparin last dose >24h ago** — Due 03/02 0900. Hold if OR likely today. But high DVT risk: cancer + immobility + POD5. Reassess after surgical decision is made.\n\n🟡 **Tiotropium not restarted** — Home COPD inhaler not on inpatient med list. Should have been continued post-op. Add to orders once acute issue addressed.\n\n🟢 **Pathology: pT3N1b adenocarcinoma, 3/12 nodes, LVI present** — Will need adjuvant FOLFOX per NCCN. Not urgent today, but flag for oncology referral at discharge. CEA baseline 14.2 for surveillance. KRAS and MSI still pending.\n\n## 📋 DAY PLAN\n\n**Discharge blocker:** Suspected anastomotic leak with developing sepsis. Goal today is diagnosis and source control.\n\n**CRITICAL — NEXT 2 HOURS:**\n- [ ] Call attending with overnight changes: drain character, WBC spike, lactate, hemodynamics\n- [ ] CT abdomen/pelvis with oral and rectal contrast — STAT\n- [ ] IVF bolus 30mL/kg crystalloid — monitor UOP closely given CKD\n- [ ] Blood cultures x2 before next pip-tazo dose\n- [ ] Repeat lactate in 4 hours\n- [ ] Type and screen confirmation, CBC, BMP\n\n**IF LEAK CONFIRMED ON CT:**\n- [ ] Consent for exploratory laparotomy ± washout ± diverting ileostomy ± anastomotic revision\n- [ ] Notify anesthesia — ASA III, COPD, CKD, active sepsis\n- [ ] Hold enoxaparin (last dose >24h ago — cleared for OR)\n- [ ] Strict NPO (already not tolerating PO)\n- [ ] Update wife Margaret and daughter Sarah (healthcare POA)\n\n**ONGOING:**\n- [ ] CXR for new O2 requirement\n- [ ] Aggressive IS, albuterol nebs, consider CPAP — pulmonary toilet is critical with his COPD\n- [ ] Restart tiotropium inhaler (home med, missed)\n- [ ] Tighten glucose: increase SSI coverage or start low-dose insulin drip if heading to OR, target <180\n- [ ] Continue pip-tazo — appropriate empiric for intra-abdominal sepsis\n- [ ] Strict I&O via foley\n- [ ] Hold PT until acute issue resolved\n\n**NON-URGENT (flag for later):**\n- [ ] Oncology referral for adjuvant chemotherapy discussion (pT3N1b)\n- [ ] CEA 14.2 baseline documented for post-treatment surveillance\n- [ ] Follow up KRAS and MSI from pathology",
+    "presentation": "James Carter is a 71-year-old male, hospital day 10, POD5 from an open right hemicolectomy for an obstructing hepatic flexure mass — path came back yesterday showing a moderately differentiated adenocarcinoma, pT3N1b, 3 of 12 nodes positive with LVI. Overnight he deteriorated significantly. His drain output changed from 45mL of serosanguinous to 120mL of cloudy greenish-brown fluid. His white count spiked from 13.1 to 19.4, we drew a lactate for the first time since admission which came back at 3.8, and his creatinine is worsening at 2.3 from a baseline of 1.4 to 1.6. He's febrile to 38.2, tachycardic at 118 with his metoprolol held for a pressure of 98/60, and he desatted to 88% overnight — now on 2L. His urine output has been declining too, down to 20mL an hour. His sugars have also been harder to control, up to 244 on escalating sliding scale. He does have underlying COPD and his incentive spirometry has been poor. [PENDING — abdominal exam is critical this morning]. My concern is anastomotic leak. I think we need an urgent CT with oral and rectal contrast, and I'd like to have a low threshold for taking him back if it confirms a leak.",
+    "am_brief": "## CARTER, James | 71M | 8W-816A | HD10, POD#5\ns/p open right hemicolectomy for obstructing hepatic flexure adenocarcinoma (pT3N1b)\n\n### Overnight\n- Drain output CHANGED: 45mL serosanguinous → 120mL cloudy/greenish-brown\n- WBC 13.1 → 19.4, new lactate 3.8, Cr 1.8 → 2.3 (baseline 1.4-1.6)\n- Febrile 38.2°C, HR 118, BP 98/60 — metoprolol held\n- SpO2 dropped to 88% → placed on 2L NC (now 94%)\n- UOP declining: 37.5 → 28 → 20 mL/hr over 72h\n- Pip-tazo started 0600 by overnight resident after drain output change\n- Hgb continuing downtrend: 10.4 → 9.4 → 8.9\n- BS 244 at 0100, required 6u SSI (was 2u three days ago)\n- Not eating, not ambulating, did not get OOB overnight\n\n### Current Status\nSeptic picture developing. The drain output is the key finding — cloudy/bilious fluid from a right paracolic gutter drain on POD5 from an ileocolic anastomosis is a leak until proven otherwise. Hemodynamically borderline, AKI worsening, new O2 requirement, deconditioning. COPD with IS only 400-600mL (goal 1500).\n\n### Yesterday's Plan → Today\n- **Continue diet as tolerated** → Not eating. Nauseous. Zero PO overnight. Formalize NPO.\n- **Encourage ambulation, goal 4x with PT** → Did not ambulate POD4-5. Refused PT. Deconditioning.\n- **Monitor WBC — if rising, consider CT** → WBC jumped 13.1 → 19.4. CT is needed NOW.\n- **Drain to remain, monitor character** → Character changed: serosanguinous → cloudy/greenish-brown. Volume tripled. This is the finding.\n- **DVT prophylaxis with enoxaparin** → Last dose 03/01 0900. Hold if OR likely. High risk: cancer + immobility + POD5.\n- **Sliding scale insulin** → Sugars worsening: 186 → 244. Escalating requirements. Needs tighter control.\n- **Repeat labs AM** → Done. Everything is worse.\n- **Path results — discuss with patient/family** → pT3N1b, 3/12 nodes. Discussion deferred for acute deterioration. Oncology referral when stable.\n\n### Key Context\nCKD3 baseline Cr 1.4-1.6, now 2.3 — limits contrast but CT is necessary here. COPD 40 pack-year — poor IS compliance, new O2 requirement, tiotropium not restarted (missed home med). Diabetes A1c 8.4 — sugars poorly controlled on SSI, hyperglycemia impairs healing. Lisinopril allergy (cough), no antibiotic allergies. 19Fr Blake drain in right paracolic gutter — the critical monitoring tool right now. Wife Margaret and daughter Sarah (healthcare POA, 555-0142) — need update today regardless of CT result. Full code."
+  }
+}

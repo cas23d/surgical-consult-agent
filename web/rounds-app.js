@@ -50,9 +50,12 @@ function renderRoundsChart(chart) {
   html += section('Demographics', `
     ${row('Name', p.name)}
     ${row('MRN', p.mrn)}
-    ${row('DOB', p.dob)}
+    ${row('DOB', p.dob + (p.age ? ' (Age ' + p.age + ')' : ''))}
     ${row('Sex', p.gender)}
     ${row('Location', enc.location)}
+    ${enc.service ? row('Service', enc.service + (enc.attending ? ' — ' + enc.attending : '')) : ''}
+    ${p.admit_date ? row('Admitted', p.admit_date + (p.hospital_day ? ' (HD' + p.hospital_day + ')' : '')) : ''}
+    ${p.code_status ? row('Code Status', p.code_status) : ''}
     ${row('Reason', enc.reason)}
   `);
 
