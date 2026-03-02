@@ -1,5 +1,7 @@
 # Surgical Consult Agent + Rounds Prep
 
+**[Live Demo](https://cas23d.github.io/surgical-consult-agent/)**
+
 Two clinical AI workflows built on the same FHIR infrastructure — demonstrating how a single EHR integration can power multiple resident-facing tools.
 
 | | Surgical Consult Agent | Rounds Prep |
