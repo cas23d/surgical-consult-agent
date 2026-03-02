@@ -1,0 +1,101 @@
+{
+  "patient_id": "rounds-eugene",
+  "name": "Eugene Morales",
+  "age_sex": "72M",
+  "location": "ICU Bed 7",
+  "summary": "Ischemic colitis Day 2, non-operative management",
+  "acuity": "red",
+  "overnight_summary": "Still bleeding despite 2u PRBC, lactate improving, mental status cleared",
+  "chart": {
+    "patient": {
+      "name": "Eugene Morales",
+      "mrn": "007281944",
+      "dob": "1953-09-17",
+      "gender": "male"
+    },
+    "encounter": {
+      "location": "ICU Bed 7",
+      "reason": "Ischemic colitis with sepsis, non-operative management"
+    },
+    "conditions": [
+      "Hypertension (I10)",
+      "Atrial fibrillation (I48.91)",
+      "Coronary artery disease (I25.10)",
+      "Chronic kidney disease stage 3 (N18.3)",
+      "Hyperlipidemia (E78.5)",
+      "TIA 2017 (G45.9)",
+      "s/p AAA repair (Z95.818)"
+    ],
+    "allergies": [
+      "No Known Drug Allergies"
+    ],
+    "vitals": [
+      "Blood pressure: Systolic: 94 mmHg / Diastolic: 58 mmHg",
+      "Heart rate: 118 bpm",
+      "Body temperature: 38.3 °C",
+      "Respiratory rate: 24 breaths/min",
+      "Oxygen saturation: 95 %",
+      "Blood pressure: Systolic: 98 mmHg / Diastolic: 62 mmHg",
+      "Heart rate: 108 bpm",
+      "Body temperature: 37.6 °C",
+      "Respiratory rate: 20 breaths/min",
+      "Oxygen saturation: 95 %"
+    ],
+    "labs": [
+      "WBC: 15.8 10*3/uL",
+      "Hemoglobin: 9.8 g/dL",
+      "Platelets: 198 10*3/uL",
+      "Sodium: 133 mEq/L",
+      "Potassium: 5.1 mEq/L",
+      "CO2: 17 mEq/L",
+      "BUN: 38 mg/dL",
+      "Creatinine: 2.2 mg/dL",
+      "Glucose: 152 mg/dL",
+      "Lactate: 2.8 mmol/L",
+      "INR: 1.3 ",
+      "Troponin: 0.04 ng/mL",
+      "pH: 7.33 ",
+      "pCO2: 30 mmHg",
+      "HCO3: 15 mEq/L"
+    ],
+    "medications": {
+      "home": [
+        "Apixaban 5mg BID",
+        "Metoprolol 50mg BID",
+        "Lisinopril 20mg daily",
+        "Atorvastatin 40mg nightly",
+        "Aspirin 81mg daily"
+      ],
+      "inpatient": [
+        "Ceftriaxone IV",
+        "Metronidazole IV",
+        "Lactated Ringers 100mL/hr",
+        "Pantoprazole 40mg IV daily"
+      ]
+    },
+    "imaging": [
+      {
+        "study": "CT Abdomen/Pelvis without Contrast",
+        "status": "preliminary",
+        "findings": "Diffuse thickening descending and sigmoid colon. Pericolonic stranding. Mild pneumatosis cannot be excluded. No free air. Limited evaluation of vasculature without contrast. Impression: Colitis, questionable ischemic changes in sigmoid, correlate clinically."
+      }
+    ],
+    "notes": [
+      {
+        "type": "Nursing Note",
+        "text": "NURSING NOTE (03:45)\nOvernight: Received 2 units PRBC (0000 and 0230). Post-transfusion Hgb pending. Still having bloody stools but less frequent — 2 episodes since midnight vs 5 in prior 8 hours. Mental status improved significantly, now oriented x3 (was only oriented to self on admission). BP remains borderline 96-102 systolic without pressors. HR afib 104-112. Serial abdominal exams per surgery: LLQ tenderness with mild guarding, no rebound, no rigidity. Apixaban and aspirin held. Metoprolol held for hypotension. Strict I&O: 1850mL in / 920mL out (including stool)."
+      },
+      {
+        "type": "Surgery Consult Note",
+        "text": "SURGERY CONSULT NOTE — Day 1 (Yesterday)\nConsulted for: Colitis on CT, hypotensive\nS: 72M with afib on apixaban, CAD, CKD3, hx AAA repair presents with acute abdominal pain, bloody diarrhea, confusion.\nO: Ill-appearing, confused. Abdomen diffusely tender, LLQ worst, mild guarding, no rebound. Rectal: gross blood. Femoral pulses palpable, feet warm. CT: colitis descending/sigmoid, questionable pneumatosis, no free air. Lactate 4.6, WBC 18.4, Cr 2.4.\nA: Ischemic colitis likely related to prior AAA repair (IMA ligation) complicated by sepsis. Hemodynamically unstable but no peritonitis — favor non-operative management with serial exams.\nP: Aggressive fluid resuscitation, broad-spectrum abx, hold anticoagulation, serial abdominal exams q4h, serial lactate q6h, CBC q6h, NPO, GI consult for scope when stable. OR if develops peritonitis, hemodynamic collapse, or rising lactate despite resuscitation. Type and screen. Discussed with attending Dr. Morrison — agrees with non-operative approach for now."
+      }
+    ],
+    "yesterday_plan": "Aggressive fluid resuscitation, broad-spectrum abx, hold anticoagulation, serial abdominal exams q4h, serial lactate q6h, CBC q6h, NPO, GI consult for scope when stable. OR if develops peritonitis, hemodynamic collapse, or rising lactate despite resuscitation. Type and screen."
+  },
+  "chart_text": "═══ PATIENT ═══\nName: Eugene Morales\nMRN: 007281944\nDOB: 1953-09-17  |  Sex: male\nLocation: ICU Bed 7\nReason for Visit: Ischemic colitis with sepsis, non-operative management\n\nAllergies: No Known Drug Allergies\n\n═══ PROBLEM LIST ═══\n  • Hypertension (I10)\n  • Atrial fibrillation (I48.91)\n  • Coronary artery disease (I25.10)\n  • Chronic kidney disease stage 3 (N18.3)\n  • Hyperlipidemia (E78.5)\n  • TIA 2017 (G45.9)\n  • s/p AAA repair (Z95.818)\n\n═══ VITALS ═══\n  • Blood pressure: Systolic: 94 mmHg / Diastolic: 58 mmHg\n  • Heart rate: 118 bpm\n  • Body temperature: 38.3 °C\n  • Respiratory rate: 24 breaths/min\n  • Oxygen saturation: 95 %\n  • Blood pressure: Systolic: 98 mmHg / Diastolic: 62 mmHg\n  • Heart rate: 108 bpm\n  • Body temperature: 37.6 °C\n  • Respiratory rate: 20 breaths/min\n  • Oxygen saturation: 95 %\n\n═══ LABS ═══\n  • WBC: 15.8 10*3/uL\n  • Hemoglobin: 9.8 g/dL\n  • Platelets: 198 10*3/uL\n  • Sodium: 133 mEq/L\n  • Potassium: 5.1 mEq/L\n  • CO2: 17 mEq/L\n  • BUN: 38 mg/dL\n  • Creatinine: 2.2 mg/dL\n  • Glucose: 152 mg/dL\n  • Lactate: 2.8 mmol/L\n  • INR: 1.3\n  • Troponin: 0.04 ng/mL\n  • pH: 7.33\n  • pCO2: 30 mmHg\n  • HCO3: 15 mEq/L\n\n═══ HOME MEDICATIONS ═══\n  • Apixaban 5mg BID\n  • Metoprolol 50mg BID\n  • Lisinopril 20mg daily\n  • Atorvastatin 40mg nightly\n  • Aspirin 81mg daily\n\n═══ CURRENT ORDERS ═══\n  • Ceftriaxone IV\n  • Metronidazole IV\n  • Lactated Ringers 100mL/hr\n  • Pantoprazole 40mg IV daily\n\n═══ IMAGING ═══\n  [PRELIMINARY] CT Abdomen/Pelvis without Contrast\n  Diffuse thickening descending and sigmoid colon. Pericolonic stranding. Mild pneumatosis cannot be excluded. No free air. Limited evaluation of vasculature without contrast. Impression: Colitis, questionable ischemic changes in sigmoid, correlate clinically.\n\n═══ CLINICAL NOTES ═══\n--- Nursing Note ---\nNURSING NOTE (03:45)\nOvernight: Received 2 units PRBC (0000 and 0230). Post-transfusion Hgb pending. Still having bloody stools but less frequent — 2 episodes since midnight vs 5 in prior 8 hours. Mental status improved significantly, now oriented x3 (was only oriented to self on admission). BP remains borderline 96-102 systolic without pressors. HR afib 104-112. Serial abdominal exams per surgery: LLQ tenderness with mild guarding, no rebound, no rigidity. Apixaban and aspirin held. Metoprolol held for hypotension. Strict I&O: 1850mL in / 920mL out (including stool).\n\n--- Surgery Consult Note ---\nSURGERY CONSULT NOTE — Day 1 (Yesterday)\nConsulted for: Colitis on CT, hypotensive\nS: 72M with afib on apixaban, CAD, CKD3, hx AAA repair presents with acute abdominal pain, bloody diarrhea, confusion.\nO: Ill-appearing, confused. Abdomen diffusely tender, LLQ worst, mild guarding, no rebound. Rectal: gross blood. Femoral pulses palpable, feet warm. CT: colitis descending/sigmoid, questionable pneumatosis, no free air. Lactate 4.6, WBC 18.4, Cr 2.4.\nA: Ischemic colitis likely related to prior AAA repair (IMA ligation) complicated by sepsis. Hemodynamically unstable but no peritonitis — favor non-operative management with serial exams.\nP: Aggressive fluid resuscitation, broad-spectrum abx, hold anticoagulation, serial abdominal exams q4h, serial lactate q6h, CBC q6h, NPO, GI consult for scope when stable. OR if develops peritonitis, hemodynamic collapse, or rising lactate despite resuscitation. Type and screen. Discussed with attending Dr. Morrison — agrees with non-operative approach for now.",
+  "stages": {
+    "alerts_dayplan": "## ⚠️ CRITICAL ALERTS\n\n🔴 **Hgb 9.8, ↓ from 11.2 yesterday** — Actively bleeding despite 2u PRBC transfusion overnight. Recheck AM CBC immediately. Transfuse if <8. If continued downtrend, escalate — discuss CTA and operative intervention with attending.\n\n🟡 **Lactate 2.8, ↓ from 4.6** — Improving but still elevated. Continue q6h trending. Rising lactate = possible bowel necrosis, would trigger change to operative management.\n\n🟡 **Cr 2.2, baseline ~1.8 (CKD3)** — AKI not yet resolved. Complicates contrast decisions if CTA needed. Trend with AM BMP. Consider nephrology input if worsening.\n\n🟡 **pH 7.33, HCO3 15** — Metabolic acidosis improving but not resolved. Trend with AM ABG/BMP.\n\n🟡 **INR 1.3** — Apixaban held, INR normalizing. Do NOT restart anticoagulation until bleeding resolved and surgical team clears.\n\n🟡 **HR 108, afib** — Rate not controlled but metoprolol held for hypotension. If RVR worsens, consider amiodarone over metoprolol given BP.\n\n🟢 **Mental status improved** — Oriented x3, was only oriented to self on admission. Good sign for perfusion.\n\n## 📋 DAY PLAN\n\n**Discharge blocker:** Active GI bleeding, borderline hemodynamics, requiring ICU-level monitoring and serial surgical exams. Not going home — goal is stabilize and avoid OR.\n\n- [ ] AM labs STAT: CBC (critical — Hgb trend), BMP, lactate\n- [ ] Serial abdominal exams q4h — document peritoneal signs each time\n- [ ] If Hgb <8 → transfuse, notify attending\n- [ ] If Hgb still dropping despite transfusion → discuss CTA with attending (weigh against CKD contrast risk with nephrology)\n- [ ] If peritoneal signs develop → CALL ATTENDING, prep for OR\n- [ ] Continue ceftriaxone + metronidazole\n- [ ] Continue holding apixaban, aspirin, metoprolol\n- [ ] GI follow-up: timing for colonoscopy when hemodynamically stable\n- [ ] Strict I&O monitoring — foley in place\n- [ ] Consider cardiology input on afib rate control given hemodynamic constraints\n- [ ] Family update — discuss that OR remains on the table if clinical picture worsens",
+    "presentation": "Eugene Morales is a 72-year-old male with a history of afib on apixaban and prior AAA repair, admitted with ischemic colitis complicated by sepsis, managed non-operatively with serial exams, now hospital day 2. Overnight his lactate trended from 4.6 down to 2.8 and his mental status cleared — he's oriented times three now, was only oriented to self on admission. He is still having bloody stools but they're less frequent. Concerning trend: his hemoglobin dropped to 9.8 despite two units of PRBCs, so he's still actively bleeding. Anticoagulation is held. [PENDING — abdominal exam is the key thing this morning]. Plan is to recheck hemoglobin first thing, continue serial abdominal exams, and if his hemoglobin keeps dropping we need to discuss CTA with the attending to evaluate his mesenteric vasculature. GI is following for scope when stable. Low threshold for OR if any peritoneal signs.",
+    "am_brief": "## MORALES, Eugene | 72M | ICU Bed 7 | Hospital Day 2\nIschemic colitis, non-operative management. s/p AAA repair (prior).\n\n### Overnight\n- Received 2u PRBC — Hgb still dropped to 9.8 (from 11.2). Still bleeding.\n- Bloody stools less frequent (2 episodes since midnight vs 5 in prior 8hrs)\n- Lactate improving: 4.6 → 2.8\n- Mental status cleared: oriented x3 (was only to self)\n- Serial abdominal exams: stable, LLQ tender with mild guarding, no peritonitis\n\n### Current Status\nBorderline hemodynamics (BP 98/62). Afib with RVR (108), rate meds held for BP. Still bleeding. All anticoagulation held. Non-operative management continuing but he's on a knife edge.\n\n### Yesterday's Plan → Today\n- **Aggressive fluid resuscitation** → Done. IVF + 2u PRBC.\n- **Hold anticoagulation** → Done. INR 1.3 and normalizing.\n- **Serial abdominal exams q4h** → Done. Stable so far, no peritonitis.\n- **Serial lactate q6h** → Done. 4.6 → 2.8, improving.\n- **GI consult** → Done. Following, will scope when hemodynamically stable.\n- **Consider CTA** → Deferred yesterday given CKD. Reassess today based on AM Hgb.\n\n### Key Context\nPrior AAA repair — IMA was likely ligated during repair, which is a major risk factor for ischemic colitis (ASCRS 2020). On apixaban for afib + history of TIA — creates tension between bleeding and thrombotic risk. CKD3 complicates contrast decisions. This patient could need emergent OR if exam changes — keep a low threshold to call the attending."
+  }
+}

@@ -185,7 +185,12 @@ function resetStages() {
 
 function showStage(stage) {
   document.querySelectorAll('.stage-content').forEach(el => el.style.display = 'none');
-  document.getElementById(`stage-${stage}`).style.display = 'block';
+  const target = document.getElementById(`stage-${stage}`);
+  target.style.display = 'block';
+  // Re-trigger fade animation
+  target.style.animation = 'none';
+  target.offsetHeight; // force reflow
+  target.style.animation = '';
 
   document.querySelectorAll('.stage-tab').forEach(tab => tab.classList.remove('active'));
   document.querySelector(`[data-stage="${stage}"]`).classList.add('active');

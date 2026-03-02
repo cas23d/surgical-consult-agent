@@ -1,0 +1,72 @@
+{
+  "patient_id": "rounds-maria",
+  "name": "Maria Santos",
+  "age_sex": "45F",
+  "location": "Floor 4 Bed 12",
+  "summary": "POD#0 laparoscopic cholecystectomy",
+  "acuity": "green",
+  "overnight_summary": "Uncomplicated, tolerating clears, ambulating",
+  "chart": {
+    "patient": {
+      "name": "Maria Santos",
+      "mrn": "005182736",
+      "dob": "1980-11-22",
+      "gender": "female"
+    },
+    "encounter": {
+      "location": "Floor 4 Bed 12",
+      "reason": "s/p laparoscopic cholecystectomy"
+    },
+    "conditions": [
+      "Cholelithiasis (K80.20)",
+      "GERD (K21.0)",
+      "Obesity BMI 34 (E66.01)"
+    ],
+    "allergies": [
+      "Penicillin (Rash)"
+    ],
+    "vitals": [
+      "Blood pressure: Systolic: 128 mmHg / Diastolic: 78 mmHg",
+      "Heart rate: 74 bpm",
+      "Body temperature: 36.9 °C",
+      "Respiratory rate: 14 breaths/min",
+      "Oxygen saturation: 99 %"
+    ],
+    "labs": [
+      "WBC: 8.2 10*3/uL",
+      "Hemoglobin: 13.1 g/dL",
+      "Platelets: 245 10*3/uL",
+      "Sodium: 140 mEq/L",
+      "Potassium: 4.1 mEq/L",
+      "Chloride: 103 mEq/L",
+      "CO2: 24 mEq/L",
+      "BUN: 14 mg/dL",
+      "Creatinine: 0.8 mg/dL",
+      "Glucose: 98 mg/dL"
+    ],
+    "medications": {
+      "home": [
+        "Omeprazole 20mg daily"
+      ],
+      "inpatient": [
+        "Acetaminophen 1g q6h",
+        "Ibuprofen 400mg q6h",
+        "Ondansetron 4mg IV PRN"
+      ]
+    },
+    "imaging": [],
+    "notes": [
+      {
+        "type": "Nursing Note",
+        "text": "NURSING NOTE (04:00)\nOvernight: Uncomplicated. Patient tolerating clear liquids without nausea or vomiting. Ambulated x2 in hallway with nursing assistance, steady gait. Pain well controlled 3/10 on PO Tylenol and ibuprofen. Voiding without difficulty. Port sites clean/dry/intact, no drainage. Resting comfortably. Requesting breakfast."
+      }
+    ],
+    "yesterday_plan": "Post-op lap chole. Advance diet as tolerated. PO pain control. Ambulate. Discharge when meeting criteria (tolerating PO, ambulating, pain controlled, voiding)."
+  },
+  "chart_text": "═══ PATIENT ═══\nName: Maria Santos\nMRN: 005182736\nDOB: 1980-11-22  |  Sex: female\nLocation: Floor 4 Bed 12\nReason for Visit: s/p laparoscopic cholecystectomy\n\nAllergies: Penicillin (Rash)\n\n═══ PROBLEM LIST ═══\n  • Cholelithiasis (K80.20)\n  • GERD (K21.0)\n  • Obesity BMI 34 (E66.01)\n\n═══ VITALS ═══\n  • Blood pressure: Systolic: 128 mmHg / Diastolic: 78 mmHg\n  • Heart rate: 74 bpm\n  • Body temperature: 36.9 °C\n  • Respiratory rate: 14 breaths/min\n  • Oxygen saturation: 99 %\n\n═══ LABS ═══\n  • WBC: 8.2 10*3/uL\n  • Hemoglobin: 13.1 g/dL\n  • Platelets: 245 10*3/uL\n  • Sodium: 140 mEq/L\n  • Potassium: 4.1 mEq/L\n  • Chloride: 103 mEq/L\n  • CO2: 24 mEq/L\n  • BUN: 14 mg/dL\n  • Creatinine: 0.8 mg/dL\n  • Glucose: 98 mg/dL\n\n═══ HOME MEDICATIONS ═══\n  • Omeprazole 20mg daily\n\n═══ CURRENT ORDERS ═══\n  • Acetaminophen 1g q6h\n  • Ibuprofen 400mg q6h\n  • Ondansetron 4mg IV PRN\n\n═══ IMAGING ═══\n  (none)\n\n═══ CLINICAL NOTES ═══\n--- Nursing Note ---\nNURSING NOTE (04:00)\nOvernight: Uncomplicated. Patient tolerating clear liquids without nausea or vomiting. Ambulated x2 in hallway with nursing assistance, steady gait. Pain well controlled 3/10 on PO Tylenol and ibuprofen. Voiding without difficulty. Port sites clean/dry/intact, no drainage. Resting comfortably. Requesting breakfast.",
+  "stages": {
+    "alerts_dayplan": "## ⚠️ CRITICAL ALERTS\n\n✅ **No critical values flagged.** All labs and vitals within normal limits. Routine post-op course.\n\n## 📋 DAY PLAN\n\n**Discharge blocker:** Tolerating PO and ambulating independently. She's close — likely going home today.\n\n- [ ] Advance diet to regular breakfast\n- [ ] Assess: tolerating solids without nausea?\n- [ ] Assess: ambulating independently without assistance?\n- [ ] Assess: pain controlled on PO meds alone?\n- [ ] If yes to all → **discharge today**\n- [ ] Discharge prescriptions: acetaminophen 1g q6h PRN, ibuprofen 400mg q6h PRN (with food), ondansetron 4mg PRN nausea\n- [ ] Discharge instructions: regular diet, no heavy lifting >10lbs x4 weeks, shower OK (no submerging port sites), return precautions (fever >101, worsening pain, jaundice, nausea/vomiting unable to keep down fluids)\n- [ ] Follow-up: surgery clinic 2 weeks\n- [ ] Confirm ride home is arranged\n- [ ] Continue home omeprazole",
+    "presentation": "Maria Santos is a 45-year-old female, POD#0 from a laparoscopic cholecystectomy for symptomatic cholelithiasis. Uncomplicated overnight — she's tolerating clears, no nausea or vomiting, ambulated twice with nursing, and her pain is well controlled at 3 out of 10 on oral Tylenol and ibuprofen. Vitals are stable, labs unremarkable. [PENDING — bedside exam, check port sites]. Plan is to advance to regular diet this morning, and if she tolerates breakfast and is ambulating independently, she meets discharge criteria. Follow up in clinic in 2 weeks. She does have a penicillin allergy — rash — just to keep on the radar.",
+    "am_brief": "## SANTOS, Maria | 45F | Floor 4 Bed 12 | POD#0\ns/p laparoscopic cholecystectomy for symptomatic cholelithiasis\n\n### Overnight\n- Tolerating clear liquids, no nausea or vomiting\n- Ambulated x2 with nursing, steady gait\n- Pain 3/10 on PO Tylenol/ibuprofen\n\n### Current Status\nStable and comfortable. On room air, regular vitals, PO pain control working. Requesting breakfast. Ready to progress toward discharge.\n\n### Yesterday's Plan → Today\n- **Surgery** → Done. Uncomplicated lap chole.\n- **Advance diet as tolerated** → Clears tolerated. Advance to regular this AM.\n- **Discharge if meeting criteria** → Assess after breakfast and morning exam.\n\n### Key Context\nPenicillin allergy (rash). BMI 34. GERD on omeprazole — continue at home. Straightforward case, should be a quick round."
+  }
+}
