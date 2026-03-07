@@ -1,6 +1,6 @@
 # Surgical Consult Agent + Rounds Prep
 
-**[Live Demo](https://cas23d.github.io/surgical-consult-agent/)**
+**[Live Demo](https://surgical-consult-agent.vercel.app/)**
 
 An AI-powered clinical decision support system built by a surgery resident for surgery residents. Two complementary workflows — surgical consults and morning rounds — demonstrating how clinical expertise and AI can combine to solve real workflow problems.
 
