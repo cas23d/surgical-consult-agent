@@ -42,6 +42,12 @@ async function loadCase(caseName) {
       inputText.textContent = currentCase.resident_input;
     }
 
+    // Enable the live AI button
+    const liveBtn = document.getElementById('btn-live-ai');
+    if (liveBtn) liveBtn.disabled = false;
+    const liveStatus = document.getElementById('live-ai-status');
+    if (liveStatus) liveStatus.textContent = '';
+
     // Reset and start agent output
     resetStages();
     showStage('triage');
@@ -353,6 +359,120 @@ function extractNoteSummary(html) {
   }
 
   return summaryHtml || fullNoteHtml;
+}
+
+
+// --- Live AI ---
+let liveAiRunning = false;
+
+async function runLiveAI() {
+  if (!currentCase || liveAiRunning) return;
+
+  liveAiRunning = true;
+  const btn = document.getElementById('btn-live-ai');
+  const status = document.getElementById('live-ai-status');
+  btn.disabled = true;
+  btn.classList.add('running');
+  status.textContent = 'Connecting to Claude...';
+
+  const residentInput = document.getElementById('resident-input-field')?.value || '';
+  const stages = ['triage', 'context', 'plan', 'note'];
+
+  resetStages();
+
+  for (let i = 0; i < stages.length; i++) {
+    const stage = stages[i];
+    status.textContent = `Analyzing: ${stage}...`;
+    showStage(stage);
+
+    const el = stage === 'note'
+      ? document.getElementById('note-content')
+      : document.getElementById(`stage-${stage}`);
+    el.innerHTML = '<div class="ai-loading">Claude is thinking...</div>';
+    el.classList.add('typing-cursor');
+
+    try {
+      const resp = await fetch('/api/consult', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stage: stage,
+          consult_message: currentCase.consult_message,
+          chart_data: currentCase.chart_text,
+          resident_input: residentInput,
+        }),
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({ error: `HTTP ${resp.status}` }));
+        throw new Error(err.error || `API returned ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      el.classList.remove('typing-cursor');
+
+      // Animate the response with the existing typeStage logic
+      await typeStageAsync(stage, data.text);
+
+    } catch (err) {
+      el.classList.remove('typing-cursor');
+      el.innerHTML = `<div class="error-message">Error: ${err.message}</div>`;
+      status.textContent = 'Error — see output above';
+      liveAiRunning = false;
+      btn.disabled = false;
+      btn.classList.remove('running');
+      return;
+    }
+  }
+
+  status.textContent = 'Live analysis complete';
+  liveAiRunning = false;
+  btn.disabled = false;
+  btn.classList.remove('running');
+}
+
+// Promise-based version of typeStage for sequential live AI calls
+function typeStageAsync(stageName, text) {
+  return new Promise((resolve) => {
+    const isNote = stageName === 'note';
+    const el = isNote ? document.getElementById('note-content') : document.getElementById(`stage-${stageName}`);
+    const rendered = markdownToHtml(text, stageName);
+    let i = 0;
+    const speed = 3;
+
+    el.innerHTML = '';
+    el.classList.add('typing-cursor');
+
+    function type() {
+      if (i < rendered.length) {
+        el.innerHTML = rendered.substring(0, i + 5);
+        i += 5;
+        typingTimer = setTimeout(type, speed);
+      } else {
+        el.innerHTML = rendered;
+        el.classList.remove('typing-cursor');
+
+        if (!isNote) makeCollapsible(el, stageName);
+
+        if (isNote) {
+          fullNoteHtml = rendered;
+          const noteToggle = document.getElementById('note-view-toggle');
+          noteToggle.style.display = 'flex';
+          currentNoteView = 'summary';
+          document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.view === 'summary') btn.classList.add('active');
+          });
+          applyNoteView();
+        }
+
+        document.querySelector(`[data-stage="${stageName}"]`).classList.add('completed');
+        resolve();
+      }
+    }
+
+    type();
+  });
 }
 
 

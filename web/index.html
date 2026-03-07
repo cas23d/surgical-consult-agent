@@ -36,9 +36,6 @@
     </div>
   </header>
 
-  <!-- Session History -->
-  <section class="session-history-section" id="session-history" style="display:none"></section>
-
   <!-- Case Selector -->
   <section class="case-selector">
     <h2>Interactive Demo</h2>
@@ -114,8 +111,14 @@
   <section class="resident-input-section" id="resident-section" style="display:none">
     <div class="resident-input-box">
       <div class="resident-header"><span class="panel-badge exam">EXAM</span> Resident Exam Findings</div>
-      <textarea id="resident-input-field" class="resident-input-field" placeholder="Enter your exam findings, clinical impression, or corrections here. The AI will use this to refine its assessment."></textarea>
-      <div class="resident-helper">Tip: Type your bedside exam, patient interview notes, or any corrections to the chart data above.</div>
+      <textarea id="resident-input-field" class="resident-input-field" placeholder="Edit the exam findings, add your own clinical impression, or type corrections — then hit 'Re-analyze with Live AI' to see how the agent responds."></textarea>
+      <div class="live-ai-row">
+        <button class="btn-live-ai" id="btn-live-ai" onclick="runLiveAI()" disabled>
+          <span class="live-ai-icon">&#9889;</span> Re-analyze with Live AI
+        </button>
+        <span class="live-ai-status" id="live-ai-status"></span>
+      </div>
+      <div class="resident-helper">Edit the exam findings above, then click the button to have Claude re-analyze the entire case in real-time.</div>
     </div>
   </section>
 

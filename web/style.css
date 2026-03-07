@@ -1363,6 +1363,75 @@ footer::before {
   font-style: italic;
 }
 
+/* === Live AI Button === */
+.live-ai-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.btn-live-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-live-ai:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2ea043 0%, #3fb950 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(46, 160, 67, 0.3);
+}
+
+.btn-live-ai:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-live-ai.running {
+  background: linear-gradient(135deg, #1a6b2c 0%, #238636 100%);
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.live-ai-icon {
+  font-size: 1rem;
+}
+
+.live-ai-status {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.ai-loading {
+  color: var(--text-dim);
+  font-style: italic;
+  padding: 1rem;
+}
+
+.error-message {
+  color: #f85149;
+  padding: 1rem;
+  background: rgba(248, 81, 73, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(248, 81, 73, 0.2);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(46, 160, 67, 0.2); }
+  50% { box-shadow: 0 0 16px rgba(46, 160, 67, 0.4); }
+}
+
 /* === Session History === */
 .session-history-section {
   max-width: 1200px;
