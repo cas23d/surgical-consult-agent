@@ -452,7 +452,6 @@ footer { animation-delay: 0.25s; }
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 10px;
-  overflow: hidden;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -491,7 +490,9 @@ footer { animation-delay: 0.25s; }
 .chart-content, .agent-content {
   padding: 1rem;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   flex: 1;
+  min-height: 0;
   font-size: 0.85rem;
   line-height: 1.55;
 }
@@ -1509,7 +1510,7 @@ footer::before {
   .demo-container {
     grid-template-columns: 1fr;
   }
-  .panel { max-height: 60vh; }
+  .panel { max-height: 70vh; }
   .workflow-steps {
     flex-direction: column;
     align-items: center;
@@ -1531,7 +1532,7 @@ footer::before {
     padding: 0.75rem;
   }
   .panel {
-    max-height: 50vh;
+    max-height: 70vh;
     padding: 1rem;
   }
   .panel-header {
