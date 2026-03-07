@@ -1,11 +1,81 @@
-// Surgical Consult Agent — Web Demo
+// Surgical Consult Agent — Web Demo with API Integration
 
 let currentCase = null;
 let typingTimer = null;
 let currentNoteView = 'summary';
 let fullNoteHtml = '';
+let sessionId = null;
+let apiBaseUrl = '/api';
 
-// --- Load a demo case ---
+const API_ENDPOINTS = {
+  health: `${apiBaseUrl}/health`,
+  triage: `${apiBaseUrl}/consult/triage`,
+  context: `${apiBaseUrl}/consult/context`,
+  plan: `${apiBaseUrl}/consult/plan`,
+  note: `${apiBaseUrl}/consult/note`,
+  save: `${apiBaseUrl}/consult/save`,
+  sessionCreate: `${apiBaseUrl}/session`,
+  sessionHistory: `${apiBaseUrl}/session/history`,
+};
+
+function initSession() {
+  const storedSessionId = localStorage.getItem('consultSessionId');
+  if (storedSessionId) {
+    sessionId = storedSessionId;
+    console.log('Using stored session:', sessionId);
+  } else {
+    sessionId = generateUUID();
+    localStorage.setItem('consultSessionId', sessionId);
+    console.log('Created new session:', sessionId);
+  }
+
+  loadSessionHistory();
+}
+
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+async function loadSessionHistory() {
+  try {
+    const response = await fetch(`${API_ENDPOINTS.sessionHistory}?session_id=${sessionId}`);
+    const data = await response.json();
+    if (data.history && data.history.length > 0) {
+      renderSessionHistory(data.history);
+    }
+  } catch (error) {
+    console.error('Error loading session history:', error);
+  }
+}
+
+function renderSessionHistory(history) {
+  const historyEl = document.getElementById('session-history');
+  if (!historyEl) return;
+
+  historyEl.innerHTML = '<h3>Your Recent Consults</h3>';
+  const list = document.createElement('div');
+  list.className = 'history-list';
+
+  history.slice(0, 5).forEach(item => {
+    const date = new Date(item.created_at).toLocaleDateString();
+    const el = document.createElement('div');
+    el.className = 'history-item';
+    el.innerHTML = `
+      <div class="history-patient">${item.patient_name}</div>
+      <div class="history-consult">${item.consult_message}</div>
+      <div class="history-date">${date}</div>
+    `;
+    list.appendChild(el);
+  });
+
+  historyEl.appendChild(list);
+}
+
+// --- Load a demo case or use custom input ---
 async function loadCase(caseName) {
   // Update button states
   document.querySelectorAll('.case-btn').forEach(btn => btn.classList.remove('active'));
@@ -14,38 +84,123 @@ async function loadCase(caseName) {
   // Stop any in-progress typing
   if (typingTimer) clearTimeout(typingTimer);
 
-  // Fetch case data
-  const resp = await fetch(`cases/${caseName}.json`);
-  currentCase = await resp.json();
+  try {
+    // Load static case data
+    const resp = await fetch(`cases/${caseName}.json`);
+    if (!resp.ok) throw new Error('Failed to load case');
+    currentCase = await resp.json();
 
-  // Show consult banner
-  const banner = document.getElementById('consult-banner');
-  banner.style.display = 'flex';
-  document.getElementById('consult-message').textContent = currentCase.consult_message;
+    // Show consult banner
+    const banner = document.getElementById('consult-banner');
+    banner.style.display = 'flex';
+    document.getElementById('consult-message').textContent = currentCase.consult_message;
 
-  // Show demo area
-  document.getElementById('demo').style.display = 'block';
+    // Show demo area
+    document.getElementById('demo').style.display = 'block';
 
-  // Render chart
-  renderChart(currentCase.chart, currentCase.chart_text);
+    // Render chart
+    renderChart(currentCase.chart, currentCase.chart_text);
+    renderKeyFindings(currentCase.key_findings);
 
-  // Render key findings banner
-  renderKeyFindings(currentCase.key_findings);
+    // Show resident input with editable form
+    const resSection = document.getElementById('resident-section');
+    resSection.style.display = 'block';
+    document.getElementById('resident-input-field').value = currentCase.resident_input || '';
 
-  // Show resident input
-  const resSection = document.getElementById('resident-section');
-  resSection.style.display = 'block';
-  document.getElementById('resident-text').textContent = currentCase.resident_input;
+    // Reset and start agent output with API calls
+    resetStages();
+    showStage('triage');
+    await streamStageFromAPI('triage', currentCase);
 
-  // Reset and start agent output
-  resetStages();
-  showStage('triage');
-  typeStage('triage', currentCase.stages.triage);
-
-  // Scroll to demo
-  banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll to demo
+    banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (error) {
+    console.error('Error loading case:', error);
+    alert('Error loading case. Please try again.');
+  }
 }
 
+async function streamStageFromAPI(stageName, caseData) {
+  const isNote = stageName === 'note';
+  const el = isNote ? document.getElementById('note-content') : document.getElementById(`stage-${stageName}`);
+
+  el.innerHTML = '';
+  el.classList.add('typing-cursor');
+
+  const payload = {
+    consult_message: caseData.consult_message,
+    chart_data: caseData.chart_text,
+    resident_input: document.getElementById('resident-input-field')?.value || caseData.resident_input || '',
+  };
+
+  const endpoint = API_ENDPOINTS[stageName];
+  if (!endpoint) {
+    console.error('Unknown stage:', stageName);
+    return;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullText = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+      fullText += chunk;
+
+      // Stream typing effect
+      el.innerHTML = markdownToHtml(fullText, stageName);
+      el.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    el.classList.remove('typing-cursor');
+
+    // Post-processing for stages
+    if (!isNote) {
+      makeCollapsible(el, stageName);
+    }
+
+    if (isNote) {
+      fullNoteHtml = markdownToHtml(fullText, stageName);
+      const noteToggle = document.getElementById('note-view-toggle');
+      noteToggle.style.display = 'flex';
+      currentNoteView = 'summary';
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.view === 'summary') btn.classList.add('active');
+      });
+      applyNoteView();
+    }
+
+    // Mark tab as completed and auto-advance
+    document.querySelector(`[data-stage="${stageName}"]`).classList.add('completed');
+
+    const stages = ['triage', 'context', 'plan', 'note'];
+    const nextIdx = stages.indexOf(stageName) + 1;
+    if (nextIdx < stages.length && currentCase) {
+      const nextStage = stages[nextIdx];
+      setTimeout(() => {
+        showStage(nextStage);
+        streamStageFromAPI(nextStage, caseData);
+      }, 800);
+    }
+  } catch (error) {
+    console.error(`Error streaming ${stageName}:`, error);
+    el.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
+    el.classList.remove('typing-cursor');
+  }
+}
 
 // --- Key Findings Banner ---
 function renderKeyFindings(kf) {
@@ -64,7 +219,6 @@ function renderKeyFindings(kf) {
   `;
 }
 
-
 // --- Render the EHR chart panel ---
 function renderChart(chart, chartText) {
   const el = document.getElementById('chart-content');
@@ -73,7 +227,6 @@ function renderChart(chart, chartText) {
 
   let html = '';
 
-  // Patient header
   html += section('Patient', `
     ${row('Name', p.name)}
     ${row('MRN', p.mrn)}
@@ -82,29 +235,19 @@ function renderChart(chart, chartText) {
     ${row('Location', enc.location)}
   `);
 
-  // Allergies
   html += section('Allergies', list(chart.allergies));
-
-  // Problem list
   html += section('Problem List', list(chart.conditions));
-
-  // Vitals
   html += section('Vitals', list(chart.vitals));
 
-  // Labs
   const labHtml = chart.labs.map(lab => {
     const abnormal = isAbnormal(lab);
     return `<li class="${abnormal ? 'abnormal' : ''}" style="${abnormal ? 'color: #f85149; font-weight: 600;' : ''}">${lab}</li>`;
   }).join('');
   html += section('Labs', `<ul class="chart-list">${labHtml}</ul>`);
 
-  // Home meds
   html += section('Home Medications', list(chart.medications.home));
-
-  // Current orders
   html += section('Current Orders', list(chart.medications.inpatient));
 
-  // Imaging
   chart.imaging.forEach(img => {
     html += section('Imaging', `
       <div style="margin-bottom: 0.25rem; font-weight: 600; color: var(--text);">[${img.status.toUpperCase()}] ${img.study}</div>
@@ -112,7 +255,6 @@ function renderChart(chart, chartText) {
     `);
   });
 
-  // Notes
   chart.notes.forEach(note => {
     html += section(note.type, `<div class="chart-note">${note.text}</div>`);
   });
@@ -140,35 +282,31 @@ function list(items) {
 }
 
 function isAbnormal(labString) {
-  // Flag obviously abnormal values
   const abnormals = [
-    /WBC:\s*(1[5-9]|[2-9]\d)/,    // WBC > 15
-    /Lactate:\s*([3-9]|[1-9]\d)/,  // Lactate > 3
-    /Creatinine:\s*(1\.[5-9]|[2-9])/, // Cr > 1.5
-    /pH:\s*7\.[012]/,               // pH < 7.3
-    /Potassium:\s*(5\.[2-9]|[6-9])/, // K > 5.2
-    /BUN:\s*([3-9]\d|[1-9]\d\d)/,   // BUN > 30
-    /CO2:\s*(1[0-8]|[0-9])\s/,      // CO2 < 19
-    /HCO3:\s*(1[0-8]|[0-9])\s/,     // HCO3 < 19
-    /INR:\s*(1\.[4-9]|[2-9])/,      // INR > 1.4
-    /Hemoglobin:\s*([0-9]|1[01])\./  // Hgb < 12
+    /WBC:\s*(1[5-9]|[2-9]\d)/,
+    /Lactate:\s*([3-9]|[1-9]\d)/,
+    /Creatinine:\s*(1\.[5-9]|[2-9])/,
+    /pH:\s*7\.[012]/,
+    /Potassium:\s*(5\.[2-9]|[6-9])/,
+    /BUN:\s*([3-9]\d|[1-9]\d\d)/,
+    /CO2:\s*(1[0-8]|[0-9])\s/,
+    /HCO3:\s*(1[0-8]|[0-9])\s/,
+    /INR:\s*(1\.[4-9]|[2-9])/,
+    /Hemoglobin:\s*([0-9]|1[01])\./
   ];
   return abnormals.some(re => re.test(labString));
 }
-
 
 // --- Agent output tabs & typing ---
 function resetStages() {
   ['triage', 'context', 'plan'].forEach(stage => {
     document.getElementById(`stage-${stage}`).innerHTML = '';
   });
-  // Reset note stage content
   const noteContent = document.getElementById('note-content');
   if (noteContent) noteContent.innerHTML = '';
   const noteToggle = document.getElementById('note-view-toggle');
   if (noteToggle) noteToggle.style.display = 'none';
 
-  // Reset note view state
   currentNoteView = 'summary';
   fullNoteHtml = '';
   document.querySelectorAll('.toggle-btn').forEach(btn => {
@@ -187,72 +325,13 @@ function showStage(stage) {
   document.querySelectorAll('.stage-content').forEach(el => el.style.display = 'none');
   const target = document.getElementById(`stage-${stage}`);
   target.style.display = 'block';
-  // Re-trigger fade animation
   target.style.animation = 'none';
-  target.offsetHeight; // force reflow
+  target.offsetHeight;
   target.style.animation = '';
 
   document.querySelectorAll('.stage-tab').forEach(tab => tab.classList.remove('active'));
   document.querySelector(`[data-stage="${stage}"]`).classList.add('active');
 }
-
-function typeStage(stageName, text) {
-  const isNote = stageName === 'note';
-  const el = isNote ? document.getElementById('note-content') : document.getElementById(`stage-${stageName}`);
-  const rendered = markdownToHtml(text, stageName);
-  const chars = rendered;
-  let i = 0;
-  const speed = 3; // ms per character
-
-  el.innerHTML = '';
-  el.classList.add('typing-cursor');
-
-  function type() {
-    if (i < chars.length) {
-      el.innerHTML = chars.substring(0, i + 5);
-      i += 5;
-      typingTimer = setTimeout(type, speed);
-    } else {
-      el.innerHTML = chars;
-      el.classList.remove('typing-cursor');
-
-      // For non-note stages, wrap h2 sections into collapsible cards
-      if (!isNote) {
-        makeCollapsible(el, stageName);
-      }
-
-      // For note stage, store full HTML and show toggle
-      if (isNote) {
-        fullNoteHtml = chars;
-        const noteToggle = document.getElementById('note-view-toggle');
-        noteToggle.style.display = 'flex';
-        // Default to summary view
-        currentNoteView = 'summary';
-        document.querySelectorAll('.toggle-btn').forEach(btn => {
-          btn.classList.remove('active');
-          if (btn.dataset.view === 'summary') btn.classList.add('active');
-        });
-        applyNoteView();
-      }
-
-      // Mark tab as completed and auto-advance
-      document.querySelector(`[data-stage="${stageName}"]`).classList.add('completed');
-
-      const stages = ['triage', 'context', 'plan', 'note'];
-      const nextIdx = stages.indexOf(stageName) + 1;
-      if (nextIdx < stages.length && currentCase) {
-        const nextStage = stages[nextIdx];
-        setTimeout(() => {
-          showStage(nextStage);
-          typeStage(nextStage, currentCase.stages[nextStage]);
-        }, 800);
-      }
-    }
-  }
-
-  type();
-}
-
 
 // --- Collapsible sections ---
 function makeCollapsible(container, stageName) {
@@ -277,7 +356,7 @@ function makeCollapsible(container, stageName) {
 
     const header = document.createElement('div');
     header.className = `collapsible-header ${colorClass}`;
-    header.innerHTML = `<span class="collapsible-chevron">\u25B6</span><span class="collapsible-title">${title}</span>`;
+    header.innerHTML = `<span class="collapsible-chevron">▶</span><span class="collapsible-title">${title}</span>`;
     header.addEventListener('click', () => {
       wrapper.classList.toggle('open');
     });
@@ -291,7 +370,6 @@ function makeCollapsible(container, stageName) {
     sections.push({ h2, wrapper });
   });
 
-  // Replace content
   container.innerHTML = '';
   sections.forEach(s => container.appendChild(s.wrapper));
 }
@@ -306,7 +384,6 @@ function getSectionColorClass(title) {
   if (t.includes('PLAN') || t.includes('RECOMMEND') || t.includes('WORKUP') || t.includes('GUIDELINE') || t.includes('ADDITIONAL')) return 'plan-section';
   return '';
 }
-
 
 // --- Note view toggle ---
 function toggleNoteView(view) {
@@ -327,7 +404,6 @@ function applyNoteView() {
 }
 
 function extractNoteSummary(html) {
-  // Parse the full note HTML and extract Assessment & Plan + Staffing Summary sections
   const container = document.createElement('div');
   container.innerHTML = html;
 
@@ -338,18 +414,15 @@ function extractNoteSummary(html) {
   for (const el of allElements) {
     const text = el.textContent.toUpperCase();
 
-    // Start capturing at Assessment & Plan or Staffing Summary
     if (el.tagName === 'H2' && (text.includes('ASSESSMENT') || text.includes('STAFFING'))) {
       capturing = true;
       summaryHtml += el.outerHTML;
       continue;
     }
 
-    // Stop capturing at next h2 that isn't one of our target sections
     if (el.tagName === 'H2' && capturing) {
       if (!text.includes('ASSESSMENT') && !text.includes('STAFFING') && !text.includes('PLAN')) {
         capturing = false;
-        // Add an <hr> between major sections
         summaryHtml += '<hr>';
         continue;
       }
@@ -357,7 +430,6 @@ function extractNoteSummary(html) {
       continue;
     }
 
-    // Also capture <hr> between sections
     if (el.tagName === 'HR' && capturing) {
       summaryHtml += el.outerHTML;
       continue;
@@ -371,49 +443,36 @@ function extractNoteSummary(html) {
   return summaryHtml || fullNoteHtml;
 }
 
-
 // --- Simple markdown to HTML ---
 function markdownToHtml(md, stageName) {
   let html = md;
 
-  // Headers
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
 
-  // Bold
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-  // Italic
   html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
 
-  // Unordered lists
-  html = html.replace(/^- \[ \] (.+)$/gm, '<li>\u2610 $1</li>');
-  html = html.replace(/^- \[x\] (.+)$/gm, '<li>\u2611 $1</li>');
+  html = html.replace(/^- \[ \] (.+)$/gm, '<li>☐ $1</li>');
+  html = html.replace(/^- \[x\] (.+)$/gm, '<li>☑ $1</li>');
   html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
 
-  // Wrap consecutive <li> in <ul>
   html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
 
-  // Numbered lists
   html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
 
-  // Paragraphs (double newline)
   html = html.replace(/\n\n/g, '</p><p>');
   html = '<p>' + html + '</p>';
 
-  // Clean up empty paragraphs
   html = html.replace(/<p>\s*<\/p>/g, '');
   html = html.replace(/<p>\s*(<[hul])/g, '$1');
   html = html.replace(/(<\/[hul].*?>)\s*<\/p>/g, '$1');
 
-  // Horizontal rules
   html = html.replace(/<p>---<\/p>/g, '<hr>');
   html = html.replace(/^---$/gm, '<hr>');
 
-  // Emojis for acuity
-  html = html.replace(/\uD83D\uDD34/g, '<span style="color: #f85149;">\uD83D\uDD34</span>');
-  html = html.replace(/\uD83D\uDFE1/g, '<span style="color: #d29922;">\uD83D\uDFE1</span>');
-  html = html.replace(/\uD83D\uDFE2/g, '<span style="color: #3fb950;">\uD83D\uDFE2</span>');
-
   return html;
 }
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initSession);

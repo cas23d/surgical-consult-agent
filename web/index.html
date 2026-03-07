@@ -36,6 +36,9 @@
     </div>
   </header>
 
+  <!-- Session History -->
+  <section class="session-history-section" id="session-history" style="display:none"></section>
+
   <!-- Case Selector -->
   <section class="case-selector">
     <h2>Interactive Demo</h2>
@@ -111,7 +114,8 @@
   <section class="resident-input-section" id="resident-section" style="display:none">
     <div class="resident-input-box">
       <div class="resident-header"><span class="panel-badge exam">EXAM</span> Resident Exam Findings</div>
-      <div class="resident-text" id="resident-text"></div>
+      <textarea id="resident-input-field" class="resident-input-field" placeholder="Enter your exam findings, clinical impression, or corrections here. The AI will use this to refine its assessment."></textarea>
+      <div class="resident-helper">Tip: Type your bedside exam, patient interview notes, or any corrections to the chart data above.</div>
     </div>
   </section>
 

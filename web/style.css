@@ -1330,6 +1330,111 @@ footer::before {
   border-radius: 3px;
 }
 
+/* === Resident Input Textarea === */
+.resident-input-field {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  resize: vertical;
+  margin: 0.75rem 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resident-input-field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+}
+
+.resident-input-field::placeholder {
+  color: var(--text-dim);
+}
+
+.resident-helper {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* === Session History === */
+.session-history-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.session-history-section h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.history-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.history-item:hover {
+  border-color: var(--accent);
+  background: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+}
+
+.history-patient {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.history-consult {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+/* === Error Messages === */
+.error-message {
+  padding: 1rem;
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  color: var(--red);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 /* === Responsive === */
 @media (max-width: 900px) {
   .demo-container {
@@ -1347,4 +1452,72 @@ footer::before {
   }
   .hero { padding: 4rem 1.5rem 3rem; }
   .hero h1 { font-size: 2rem; }
+  .history-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .demo-container {
+    padding: 0.75rem;
+  }
+  .panel {
+    max-height: 50vh;
+    padding: 1rem;
+  }
+  .panel-header {
+    font-size: 0.9rem;
+  }
+  .chart-content {
+    font-size: 0.85rem;
+  }
+  .stage-tabs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .stage-tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .case-selector {
+    padding: 1.5rem 1rem;
+  }
+  .case-buttons {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .case-btn {
+    padding: 1rem;
+  }
+  .resident-input-section {
+    padding: 1rem;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+  .tagline {
+    font-size: 0.9rem;
+  }
+  .hero-links {
+    flex-direction: column;
+  }
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+  .chart-section-header {
+    font-size: 0.85rem;
+  }
+  .resident-input-field {
+    min-height: 80px;
+    font-size: 16px;
+  }
 }
