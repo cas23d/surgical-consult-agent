@@ -1,81 +1,11 @@
-// Surgical Consult Agent — Web Demo with API Integration
+// Surgical Consult Agent — Web Demo
 
 let currentCase = null;
 let typingTimer = null;
 let currentNoteView = 'summary';
 let fullNoteHtml = '';
-let sessionId = null;
-let apiBaseUrl = '/api';
 
-const API_ENDPOINTS = {
-  health: `${apiBaseUrl}/health`,
-  triage: `${apiBaseUrl}/consult/triage`,
-  context: `${apiBaseUrl}/consult/context`,
-  plan: `${apiBaseUrl}/consult/plan`,
-  note: `${apiBaseUrl}/consult/note`,
-  save: `${apiBaseUrl}/consult/save`,
-  sessionCreate: `${apiBaseUrl}/session`,
-  sessionHistory: `${apiBaseUrl}/session/history`,
-};
-
-function initSession() {
-  const storedSessionId = localStorage.getItem('consultSessionId');
-  if (storedSessionId) {
-    sessionId = storedSessionId;
-    console.log('Using stored session:', sessionId);
-  } else {
-    sessionId = generateUUID();
-    localStorage.setItem('consultSessionId', sessionId);
-    console.log('Created new session:', sessionId);
-  }
-
-  loadSessionHistory();
-}
-
-function generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
-
-async function loadSessionHistory() {
-  try {
-    const response = await fetch(`${API_ENDPOINTS.sessionHistory}?session_id=${sessionId}`);
-    const data = await response.json();
-    if (data.history && data.history.length > 0) {
-      renderSessionHistory(data.history);
-    }
-  } catch (error) {
-    console.error('Error loading session history:', error);
-  }
-}
-
-function renderSessionHistory(history) {
-  const historyEl = document.getElementById('session-history');
-  if (!historyEl) return;
-
-  historyEl.innerHTML = '<h3>Your Recent Consults</h3>';
-  const list = document.createElement('div');
-  list.className = 'history-list';
-
-  history.slice(0, 5).forEach(item => {
-    const date = new Date(item.created_at).toLocaleDateString();
-    const el = document.createElement('div');
-    el.className = 'history-item';
-    el.innerHTML = `
-      <div class="history-patient">${item.patient_name}</div>
-      <div class="history-consult">${item.consult_message}</div>
-      <div class="history-date">${date}</div>
-    `;
-    list.appendChild(el);
-  });
-
-  historyEl.appendChild(list);
-}
-
-// --- Load a demo case or use custom input ---
+// --- Load a demo case ---
 async function loadCase(caseName) {
   // Update button states
   document.querySelectorAll('.case-btn').forEach(btn => btn.classList.remove('active'));
@@ -85,7 +15,6 @@ async function loadCase(caseName) {
   if (typingTimer) clearTimeout(typingTimer);
 
   try {
-    // Load static case data
     const resp = await fetch(`cases/${caseName}.json`);
     if (!resp.ok) throw new Error('Failed to load case');
     currentCase = await resp.json();
@@ -102,15 +31,21 @@ async function loadCase(caseName) {
     renderChart(currentCase.chart, currentCase.chart_text);
     renderKeyFindings(currentCase.key_findings);
 
-    // Show resident input with editable form
+    // Show resident input — populate textarea if it exists, otherwise fall back to static text
     const resSection = document.getElementById('resident-section');
     resSection.style.display = 'block';
-    document.getElementById('resident-input-field').value = currentCase.resident_input || '';
+    const inputField = document.getElementById('resident-input-field');
+    const inputText = document.getElementById('resident-text');
+    if (inputField) {
+      inputField.value = currentCase.resident_input || '';
+    } else if (inputText) {
+      inputText.textContent = currentCase.resident_input;
+    }
 
-    // Reset and start agent output with API calls
+    // Reset and start agent output
     resetStages();
     showStage('triage');
-    await streamStageFromAPI('triage', currentCase);
+    typeStage('triage', currentCase.stages.triage);
 
     // Scroll to demo
     banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -120,87 +55,6 @@ async function loadCase(caseName) {
   }
 }
 
-async function streamStageFromAPI(stageName, caseData) {
-  const isNote = stageName === 'note';
-  const el = isNote ? document.getElementById('note-content') : document.getElementById(`stage-${stageName}`);
-
-  el.innerHTML = '';
-  el.classList.add('typing-cursor');
-
-  const payload = {
-    consult_message: caseData.consult_message,
-    chart_data: caseData.chart_text,
-    resident_input: document.getElementById('resident-input-field')?.value || caseData.resident_input || '',
-  };
-
-  const endpoint = API_ENDPOINTS[stageName];
-  if (!endpoint) {
-    console.error('Unknown stage:', stageName);
-    return;
-  }
-
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) throw new Error(`API error: ${response.status}`);
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let fullText = '';
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      const chunk = decoder.decode(value, { stream: true });
-      fullText += chunk;
-
-      // Stream typing effect
-      el.innerHTML = markdownToHtml(fullText, stageName);
-      el.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-
-    el.classList.remove('typing-cursor');
-
-    // Post-processing for stages
-    if (!isNote) {
-      makeCollapsible(el, stageName);
-    }
-
-    if (isNote) {
-      fullNoteHtml = markdownToHtml(fullText, stageName);
-      const noteToggle = document.getElementById('note-view-toggle');
-      noteToggle.style.display = 'flex';
-      currentNoteView = 'summary';
-      document.querySelectorAll('.toggle-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.view === 'summary') btn.classList.add('active');
-      });
-      applyNoteView();
-    }
-
-    // Mark tab as completed and auto-advance
-    document.querySelector(`[data-stage="${stageName}"]`).classList.add('completed');
-
-    const stages = ['triage', 'context', 'plan', 'note'];
-    const nextIdx = stages.indexOf(stageName) + 1;
-    if (nextIdx < stages.length && currentCase) {
-      const nextStage = stages[nextIdx];
-      setTimeout(() => {
-        showStage(nextStage);
-        streamStageFromAPI(nextStage, caseData);
-      }, 800);
-    }
-  } catch (error) {
-    console.error(`Error streaming ${stageName}:`, error);
-    el.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
-    el.classList.remove('typing-cursor');
-  }
-}
 
 // --- Key Findings Banner ---
 function renderKeyFindings(kf) {
@@ -218,6 +72,7 @@ function renderKeyFindings(kf) {
     <span class="kf-impression">${kf.impression}</span>
   `;
 }
+
 
 // --- Render the EHR chart panel ---
 function renderChart(chart, chartText) {
@@ -297,6 +152,7 @@ function isAbnormal(labString) {
   return abnormals.some(re => re.test(labString));
 }
 
+
 // --- Agent output tabs & typing ---
 function resetStages() {
   ['triage', 'context', 'plan'].forEach(stage => {
@@ -326,12 +182,67 @@ function showStage(stage) {
   const target = document.getElementById(`stage-${stage}`);
   target.style.display = 'block';
   target.style.animation = 'none';
-  target.offsetHeight;
+  target.offsetHeight; // force reflow
   target.style.animation = '';
 
   document.querySelectorAll('.stage-tab').forEach(tab => tab.classList.remove('active'));
   document.querySelector(`[data-stage="${stage}"]`).classList.add('active');
 }
+
+function typeStage(stageName, text) {
+  const isNote = stageName === 'note';
+  const el = isNote ? document.getElementById('note-content') : document.getElementById(`stage-${stageName}`);
+  const rendered = markdownToHtml(text, stageName);
+  const chars = rendered;
+  let i = 0;
+  const speed = 3; // ms per character
+
+  el.innerHTML = '';
+  el.classList.add('typing-cursor');
+
+  function type() {
+    if (i < chars.length) {
+      el.innerHTML = chars.substring(0, i + 5);
+      i += 5;
+      typingTimer = setTimeout(type, speed);
+    } else {
+      el.innerHTML = chars;
+      el.classList.remove('typing-cursor');
+
+      if (!isNote) {
+        makeCollapsible(el, stageName);
+      }
+
+      if (isNote) {
+        fullNoteHtml = chars;
+        const noteToggle = document.getElementById('note-view-toggle');
+        noteToggle.style.display = 'flex';
+        currentNoteView = 'summary';
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.view === 'summary') btn.classList.add('active');
+        });
+        applyNoteView();
+      }
+
+      // Mark tab as completed and auto-advance
+      document.querySelector(`[data-stage="${stageName}"]`).classList.add('completed');
+
+      const stages = ['triage', 'context', 'plan', 'note'];
+      const nextIdx = stages.indexOf(stageName) + 1;
+      if (nextIdx < stages.length && currentCase) {
+        const nextStage = stages[nextIdx];
+        setTimeout(() => {
+          showStage(nextStage);
+          typeStage(nextStage, currentCase.stages[nextStage]);
+        }, 800);
+      }
+    }
+  }
+
+  type();
+}
+
 
 // --- Collapsible sections ---
 function makeCollapsible(container, stageName) {
@@ -384,6 +295,7 @@ function getSectionColorClass(title) {
   if (t.includes('PLAN') || t.includes('RECOMMEND') || t.includes('WORKUP') || t.includes('GUIDELINE') || t.includes('ADDITIONAL')) return 'plan-section';
   return '';
 }
+
 
 // --- Note view toggle ---
 function toggleNoteView(view) {
@@ -443,6 +355,7 @@ function extractNoteSummary(html) {
   return summaryHtml || fullNoteHtml;
 }
 
+
 // --- Simple markdown to HTML ---
 function markdownToHtml(md, stageName) {
   let html = md;
@@ -471,8 +384,10 @@ function markdownToHtml(md, stageName) {
   html = html.replace(/<p>---<\/p>/g, '<hr>');
   html = html.replace(/^---$/gm, '<hr>');
 
+  // Emoji acuity colors
+  html = html.replace(/\uD83D\uDD34/g, '<span style="color: #f85149;">\uD83D\uDD34</span>');
+  html = html.replace(/\uD83D\uDFE1/g, '<span style="color: #d29922;">\uD83D\uDFE1</span>');
+  html = html.replace(/\uD83D\uDFE2/g, '<span style="color: #3fb950;">\uD83D\uDFE2</span>');
+
   return html;
 }
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', initSession);
