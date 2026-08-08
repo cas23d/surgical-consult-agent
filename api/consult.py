@@ -79,6 +79,7 @@ class handler(BaseHTTPRequestHandler):
                 system=SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": user_message}],
             )
-            self._send_json(200, {"text": response.content[0].text})
+            text = next(b.text for b in response.content if b.type == "text")
+            self._send_json(200, {"text": text})
         except Exception as e:
             self._send_json(500, {"error": str(e)})

@@ -39,7 +39,7 @@ def call_claude(system: str, user_message: str) -> str:
             system=system,
             messages=[{"role": "user", "content": user_message}],
         )
-        return response.content[0].text
+        return next(b.text for b in response.content if b.type == "text")
     except Exception as e:
         logger.error(f"Error calling Claude API: {str(e)}")
         raise

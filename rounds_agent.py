@@ -30,7 +30,7 @@ def call_claude(system, user_message):
         system=system,
         messages=[{"role": "user", "content": user_message}],
     )
-    return response.content[0].text
+    return next(b.text for b in response.content if b.type == "text")
 
 
 def get_input(prompt=">> ", allow_empty=True):
