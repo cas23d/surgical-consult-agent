@@ -19,14 +19,14 @@ from rounds_prompts import (
 load_dotenv()
 
 client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-5"
 
 
 def call_claude(system, user_message):
     """Send a message to Claude and return the response text."""
     response = client.messages.create(
         model=MODEL,
-        max_tokens=4096,
+        max_tokens=8192,
         system=system,
         messages=[{"role": "user", "content": user_message}],
     )

@@ -15,7 +15,7 @@ from anthropic import Anthropic
 from prompts import SYSTEM_PROMPT, TRIAGE_PROMPT, CONTEXT_PROMPT, PLAN_PROMPT, NOTE_PROMPT
 
 client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-5"
 
 STAGE_PROMPTS = {
     "triage": TRIAGE_PROMPT,
@@ -75,7 +75,7 @@ class handler(BaseHTTPRequestHandler):
         try:
             response = client.messages.create(
                 model=MODEL,
-                max_tokens=4096,
+                max_tokens=8192,
                 system=SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": user_message}],
             )

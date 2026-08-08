@@ -39,7 +39,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-5"
 
 sb_url = os.getenv("VITE_SUPABASE_URL")
 sb_key = os.getenv("VITE_SUPABASE_ANON_KEY")
@@ -74,7 +74,7 @@ def call_claude_stream(system: str, user_message: str) -> Generator[str, None, N
     try:
         with client.messages.stream(
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=8192,
             system=system,
             messages=[{"role": "user", "content": user_message}],
         ) as stream:
