@@ -76,6 +76,7 @@ class handler(BaseHTTPRequestHandler):
             response = client.messages.create(
                 model=MODEL,
                 max_tokens=8192,
+                output_config={"effort": "medium"},
                 system=SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": user_message}],
             )
