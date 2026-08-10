@@ -42,9 +42,9 @@ async function loadCase(caseName) {
       inputText.textContent = currentCase.resident_input;
     }
 
-    // Enable the live AI button
+    // Public portfolio deployments intentionally keep model-backed calls disabled.
     const liveBtn = document.getElementById('btn-live-ai');
-    if (liveBtn) liveBtn.disabled = false;
+    if (liveBtn) liveBtn.disabled = true;
     const liveStatus = document.getElementById('live-ai-status');
     if (liveStatus) liveStatus.textContent = '';
 

@@ -1,6 +1,8 @@
 # Clinical Workflow Reference
 
-Source: Christopher Stephenson, MD — real surgical consult workflow
+Source: Christopher Stephenson, MD — product requirements derived from surgical training
+
+This document describes the intended workflow for a portfolio prototype. It is not a validated clinical protocol.
 
 ## Entry Point
 
@@ -31,9 +33,10 @@ Surgeon receives consult page with:
 
 1. Red flags highlighted (things I shouldn't miss)
 2. Missing information flagged + prompts for what to ask the patient
-3. Evidence-based management plan from chart data
-   - Must cite specific guideline and source
-   - Recognize guidelines may not apply cleanly (e.g., SBO + Roux-en-Y)
+3. Draft management considerations from available chart data
+   - Surface the source and version behind any guideline-based claim
+   - Require independent verification before clinical use
+   - Make uncertainty visible when guidance does not apply cleanly
 4. Suggested additional workup (imaging, labs, consultants)
 5. Draft consult note
 6. Staffing summary (help sounding coherent on hour 28)

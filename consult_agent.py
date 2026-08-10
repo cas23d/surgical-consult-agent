@@ -1,10 +1,8 @@
-"""Surgical Consult Agent — pulls patient data from EHR via FHIR,
-analyzes the chart, and produces structured clinical outputs.
+"""Controlled CLI for the surgical consult portfolio prototype.
 
 Built by Christopher Stephenson, MD
 """
 
-import json
 import os
 import logging
 from dotenv import load_dotenv
@@ -26,26 +24,29 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-MODEL = "claude-sonnet-5"
-
 
 def call_claude(system: str, user_message: str) -> str:
-    """Send a message to Claude and return the response text."""
+    """Send a controlled evaluation request and return the text block."""
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    model = os.getenv("ANTHROPIC_MODEL")
+    if not api_key or not model:
+        raise RuntimeError("ANTHROPIC_API_KEY and ANTHROPIC_MODEL are required")
+
+    client = Anthropic(api_key=api_key)
     try:
         response = client.messages.create(
-            model=MODEL,
+            model=model,
             max_tokens=8192,
             system=system,
             messages=[{"role": "user", "content": user_message}],
         )
         return next(b.text for b in response.content if b.type == "text")
-    except Exception as e:
-        logger.error(f"Error calling Claude API: {str(e)}")
+    except Exception:
+        logger.error("Model request failed")
         raise
 
 
-def get_input(prompt: str = ">> ", allow_empty: bool = False) -> str:
+def get_input(prompt: str = ">> ") -> str:
     """Collect multi-line input. Empty line submits."""
     print(prompt, end="", flush=True)
     lines = []
@@ -74,8 +75,8 @@ def run_consult() -> None:
     """Run the surgical consult workflow."""
 
     print_header("SURGICAL CONSULT AGENT")
-    print("Paste the consult page info below.")
-    print("Include the patient MRN and consult message.\n")
+    print("Use fictional or appropriately authorized test data only.")
+    print("Enter a consult message and a patient ID from the configured FHIR test server.\n")
 
     try:
         # --- Input: consult page ---
@@ -85,35 +86,24 @@ def run_consult() -> None:
             print("Error: Consult message cannot be empty")
             return
 
-        # --- Load patient from FHIR ---
-        demo_config = os.path.join(os.path.dirname(__file__), "demo_patient.json")
-        patient_id = None
-        if os.path.exists(demo_config):
-            try:
-                with open(demo_config) as f:
-                    config = json.load(f)
-                patient_id = config.get("patient_id")
-            except (json.JSONDecodeError, IOError) as e:
-                logger.warning(f"Error reading demo_patient.json: {str(e)}")
-
+        patient_id = input("Enter FHIR Patient ID: ").strip()
         if not patient_id:
-            patient_id = input("Enter FHIR Patient ID: ").strip()
-            if not patient_id:
-                logger.warning("No patient ID provided")
-                print("Error: Patient ID cannot be empty")
-                return
+            logger.warning("No patient ID provided")
+            print("Error: Patient ID cannot be empty")
+            return
 
-        print("\n⏳ Pulling patient chart from EHR...\n")
+        print("\nPulling synthetic chart context from the configured FHIR server...\n")
         chart_data = pull_full_chart(patient_id)
         chart_text = format_chart_for_ai(chart_data)
 
         print(chart_text)
         print_header("CHART DATA LOADED")
-    except Exception as e:
-        logger.error(f"Error in consult setup: {str(e)}")
-        print(f"Error: {str(e)}")
+    except Exception:
+        logger.error("Consult setup failed")
+        print("Error: unable to load the synthetic consult context")
         return
 
+    try:
         # --- Stage 1: Triage ---
         print_header("TRIAGE ANALYSIS")
         print("Analyzing acuity and red flags...\n")
@@ -150,7 +140,7 @@ def run_consult() -> None:
 
         # --- Stage 3: Assessment & Plan ---
         print_header("ASSESSMENT & PLAN")
-        print("Generating evidence-based plan...\n")
+        print("Generating draft considerations for clinician review...\n")
 
         plan = call_claude(
             system=SYSTEM_PROMPT,
@@ -182,11 +172,11 @@ def run_consult() -> None:
         )
         print(note)
 
-        print_header("CONSULT COMPLETE")
+        print_header("DRAFT COMPLETE - CLINICIAN VERIFICATION REQUIRED")
         logger.info("Consult workflow completed successfully")
-    except Exception as e:
-        logger.error(f"Error in consult workflow: {str(e)}")
-        print(f"\nError during consult: {str(e)}")
+    except Exception:
+        logger.error("Consult workflow failed")
+        print("\nError: the draft workflow could not be completed")
         raise
 
 

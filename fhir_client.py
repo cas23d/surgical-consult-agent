@@ -1,16 +1,26 @@
-"""Pull patient data from a FHIR R4 server and format it for the consult agent."""
+"""Retrieve test data from a configurable FHIR R4 server.
 
-import json
+The default is the public HAPI FHIR test server. This adapter has not been
+validated against a production EHR implementation.
+"""
+
 import base64
+import os
 import requests
 
-FHIR_BASE = "https://hapi.fhir.org/baseR4"
+FHIR_BASE = os.environ.get("FHIR_BASE_URL", "https://hapi.fhir.org/baseR4").rstrip("/")
+FHIR_TIMEOUT_SECONDS = 20
 HEADERS = {"Accept": "application/fhir+json"}
 
 
 def _get_bundle(resource_type, params):
     """Fetch a FHIR bundle and return the list of resources."""
-    resp = requests.get(f"{FHIR_BASE}/{resource_type}", params=params, headers=HEADERS)
+    resp = requests.get(
+        f"{FHIR_BASE}/{resource_type}",
+        params=params,
+        headers=HEADERS,
+        timeout=FHIR_TIMEOUT_SECONDS,
+    )
     resp.raise_for_status()
     bundle = resp.json()
     return [e["resource"] for e in bundle.get("entry", [])]
@@ -18,7 +28,11 @@ def _get_bundle(resource_type, params):
 
 def get_patient(patient_id):
     """Fetch patient demographics."""
-    resp = requests.get(f"{FHIR_BASE}/Patient/{patient_id}", headers=HEADERS)
+    resp = requests.get(
+        f"{FHIR_BASE}/Patient/{patient_id}",
+        headers=HEADERS,
+        timeout=FHIR_TIMEOUT_SECONDS,
+    )
     resp.raise_for_status()
     p = resp.json()
     name = p.get("name", [{}])[0]

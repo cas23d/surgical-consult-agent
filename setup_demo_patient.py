@@ -1,6 +1,10 @@
-"""Upload synthetic patient Harold Whitaker to HAPI FHIR server for demo."""
+"""Upload one fictional patient to the public HAPI FHIR test server.
 
-import json
+Never use this utility with real patient data. The public test server provides
+no privacy guarantee and may be reset without notice.
+"""
+
+import base64
 import requests
 
 FHIR_BASE = "https://hapi.fhir.org/baseR4"
@@ -172,7 +176,6 @@ def main():
     })
 
     # --- ED Provider Note (as DocumentReference) ---
-    import base64
     note_text = """ED PROVIDER NOTE (14:05)
 HPI: 68M with history of HTN, CAD (s/p PCI 2018), and diverticulosis presents with acute onset abdominal pain beginning this morning. Pain started periumbilical, now diffuse. Constant, worsening. Associated nausea. No bowel movement since yesterday. No hematemesis or melena. Denies prior abdominal surgeries.
 
@@ -197,12 +200,7 @@ ED Interventions: 2L LR given, blood cultures drawn, started on Piperacillin-Taz
 
     print(f"\nDone! Patient ID: {patient_id}")
     print(f"MRN: 004593821")
-    print(f"\nSave this patient ID — the agent will use it to pull data.")
-
-    # Save patient ID for the agent
-    with open("demo_patient.json", "w") as f:
-        json.dump({"patient_id": patient_id, "mrn": "004593821", "fhir_base": FHIR_BASE}, f, indent=2)
-    print(f"Saved to demo_patient.json")
+    print("\nUse this fictional patient ID when running the controlled CLI.")
 
 
 if __name__ == "__main__":

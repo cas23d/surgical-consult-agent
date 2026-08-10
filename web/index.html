@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI-powered surgical consult workup: triage, gap analysis, evidence-based plan, and documentation. Built with Python, Claude API, and FHIR R4.">
+  <meta name="description" content="A clinician-designed portfolio prototype for AI-assisted surgical consult preparation using synthetic patient data.">
   <meta property="og:title" content="Surgical Consult Agent — Christopher Stephenson, MD">
-  <meta property="og:description" content="An AI agent that pulls patient data from the EHR via FHIR, analyzes the clinical picture, and generates a complete surgical consult workup.">
+  <meta property="og:description" content="A clinician-designed portfolio prototype for AI-assisted surgical consult preparation using synthetic patient data.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <title>Surgical Consult Agent — Christopher Stephenson, MD</title>
@@ -19,16 +19,14 @@
   <!-- Navigation -->
   <nav class="site-nav">
     <a href="index.html" class="nav-link active">Consult Agent</a>
-    <span class="nav-divider">|</span>
-    <a href="rounds.html" class="nav-link">Rounds Prep</a>
   </nav>
 
   <!-- Hero -->
   <header class="hero">
     <div class="hero-content">
       <h1>Surgical Consult Agent</h1>
-      <p class="tagline">An AI agent that pulls patient data from the EHR via FHIR, analyzes the clinical picture, and generates a complete surgical consult workup — triage, gap analysis, evidence-based plan, and documentation.</p>
-      <p class="byline">Built by <strong>Christopher Stephenson, MD</strong> — physician and engineer</p>
+      <p class="tagline">A clinician-designed prototype that turns a synthetic chart into a structured surgical consult workup — triage, information gaps, assessment, and documentation.</p>
+      <p class="byline">Built by <strong>Christopher Stephenson, MD</strong> — practicing physician and AI-assisted product builder</p>
       <div class="hero-links">
         <a href="https://github.com/cas23d/surgical-consult-agent" target="_blank" class="btn-primary">GitHub</a>
         <a href="https://www.linkedin.com/in/christopher-stephenson-md" target="_blank" class="btn-outline">LinkedIn</a>
@@ -36,10 +34,14 @@
     </div>
   </header>
 
+  <section class="prototype-disclosure" aria-label="Prototype disclosure">
+    <strong>Portfolio prototype:</strong> The hosted demo uses fictional patients and pre-generated outputs. A separate FHIR R4 ingestion module and optional model-backed endpoint are included in the source code, but this is not connected to a production EHR and is not for clinical use.
+  </section>
+
   <!-- Case Selector -->
   <section class="case-selector">
     <h2>Interactive Demo</h2>
-    <p class="case-instructions">Select a case to see the agent in action. Chart data loads on the left; AI analysis streams on the right.</p>
+    <p class="case-instructions">Select a fictional case to inspect the proposed workflow. Synthetic chart data loads on the left; a pre-generated example analysis appears on the right.</p>
     <div class="case-buttons">
       <button class="case-btn" data-case="case1" onclick="loadCase('case1')">
         <span class="case-top-row">
@@ -48,14 +50,6 @@
         </span>
         <span class="case-title">Perforated Diverticulitis</span>
         <span class="case-desc">68M with free air on CT — surgical emergency</span>
-      </button>
-      <button class="case-btn" data-case="case2" onclick="loadCase('case2')">
-        <span class="case-top-row">
-          <span class="case-label">Case 2</span>
-          <span class="acuity-dot red">Urgent</span>
-        </span>
-        <span class="case-title">Ischemic Colitis</span>
-        <span class="case-desc">72M on anticoagulation with hemodynamic instability</span>
       </button>
     </div>
   </section>
@@ -111,14 +105,14 @@
   <section class="resident-input-section" id="resident-section" style="display:none">
     <div class="resident-input-box">
       <div class="resident-header"><span class="panel-badge exam">EXAM</span> Resident Exam Findings</div>
-      <textarea id="resident-input-field" class="resident-input-field" placeholder="Edit the exam findings, add your own clinical impression, or type corrections — then hit 'Re-analyze with Live AI' to see how the agent responds."></textarea>
+      <textarea id="resident-input-field" class="resident-input-field" placeholder="Edit the fictional exam findings to explore the intended human-in-the-loop workflow."></textarea>
       <div class="live-ai-row">
-        <button class="btn-live-ai" id="btn-live-ai" onclick="runLiveAI()" disabled>
-          <span class="live-ai-icon">&#9889;</span> Re-analyze with Live AI
+        <button class="btn-live-ai" id="btn-live-ai" disabled>
+          <span class="live-ai-icon">&#9889;</span> Public model calls disabled
         </button>
         <span class="live-ai-status" id="live-ai-status"></span>
       </div>
-      <div class="resident-helper">Edit the exam findings above, then click the button to have Claude re-analyze the entire case in real-time.</div>
+      <div class="resident-helper">Model-backed re-analysis is disabled on the public portfolio deployment to prevent unreviewed clinical use and API abuse. The endpoint implementation remains available for controlled local evaluation.</div>
     </div>
   </section>
 
@@ -137,8 +131,8 @@
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-text">
-          <strong>Agent pulls chart via FHIR</strong>
-          <p>Vitals, labs, imaging, meds, notes — all pulled automatically</p>
+          <strong>Chart context is assembled</strong>
+          <p>The hosted demo uses synthetic chart data; the repository includes a separate FHIR R4 ingestion prototype</p>
         </div>
       </div>
       <div class="step-connector"><span class="connector-line"></span></div>
@@ -146,7 +140,7 @@
         <div class="step-num">3</div>
         <div class="step-text">
           <strong>AI analyzes the case</strong>
-          <p>Triage, red flags, gaps in management, evidence-based plan</p>
+          <p>Proposes triage, red flags, information gaps, and a draft plan for clinician review</p>
         </div>
       </div>
       <div class="step-connector"><span class="connector-line"></span></div>
@@ -154,7 +148,7 @@
         <div class="step-num">4</div>
         <div class="step-text">
           <strong>Outputs ready</strong>
-          <p>Consult note, staffing summary, and follow-up tasks</p>
+          <p>Produces draft documentation, a staffing summary, and follow-up tasks</p>
         </div>
       </div>
     </div>
@@ -169,16 +163,16 @@
         <p>The agent surfaces what the resident might miss at 2 AM — it doesn't make decisions. The clinician stays in the loop.</p>
       </div>
       <div class="principle">
-        <h3>Guideline-transparent</h3>
-        <p>Every recommendation cites the specific guideline and society. When a guideline doesn't apply cleanly, the agent says so.</p>
+        <h3>Evidence should be traceable</h3>
+        <p>The workflow is designed to surface the basis for recommendations. Any citation or clinical recommendation still requires clinician verification.</p>
       </div>
       <div class="principle">
         <h3>Built for messy reality</h3>
-        <p>Residents type in shorthand. Chart data is incomplete. Radiology reads can be wrong. The agent handles all of it.</p>
+        <p>Residents type in shorthand and chart data is incomplete. The design makes uncertainty and missing information visible instead of hiding it.</p>
       </div>
       <div class="principle">
-        <h3>No frameworks, no magic</h3>
-        <p>Raw API calls to Claude via the Anthropic SDK. FHIR R4 for EHR data. Every line of code is readable and auditable.</p>
+        <h3>Readable prototype</h3>
+        <p>Plain Python and JavaScript keep the workflow inspectable. The repository shows the prompts, FHIR adapter, model call, and interface directly.</p>
       </div>
     </div>
   </section>
@@ -188,11 +182,11 @@
     <h2>Why I Built This</h2>
     <div class="about-content">
       <div class="about-text">
-        <p>I'm a physician who left clinical practice to work at the intersection of medicine and AI. Not to advise from the sidelines — to build.</p>
-        <p>This agent exists because I've been the resident at 2 AM staring at a consult page, pulling together labs, imaging, and vitals from six different screens while trying to think clearly about a sick patient. That experience is the spec. The clinical reasoning in this demo isn't prompted — it's how I actually think through these cases.</p>
-        <p>The Consult Agent handles the acute question: "Is this patient sick?" <a href="rounds.html" style="color: var(--accent);">Rounds Prep</a> handles the daily question: "What changed? What's the plan?" Together they cover the two core workflows that consume a surgery resident's cognitive bandwidth.</p>
-        <p>I built this with Python, the Anthropic API, and FHIR R4 — no templates, no drag-and-drop. Every clinical decision, every guideline citation, every edge case flag reflects real surgical training.</p>
-        <p class="about-cta">I'm looking for a role where clinical depth and engineering ability both matter. If that's your team, let's talk.</p>
+        <p>I'm a practicing physician who builds at the intersection of clinical care and AI. I use AI-assisted development to turn workflow problems into prototypes that clinicians and product teams can inspect.</p>
+        <p>This agent exists because I've been the resident at 2 AM staring at a consult page, pulling together labs, imaging, and vitals from six different screens while trying to think clearly about a sick patient. That experience informed the workflow and the human-review checkpoints.</p>
+        <p>The Consult Agent focuses on the acute question: "How sick is this patient, what information is missing, and what requires immediate clinician attention?"</p>
+        <p>I directed AI coding agents through product definition, implementation, debugging, and deployment while owning the clinical workflow, prompt design, and evaluation criteria.</p>
+        <p class="about-cta">I'm interested in teams where clinical depth, product judgment, and rapid AI-assisted prototyping all matter.</p>
       </div>
       <div class="about-links">
         <a href="mailto:christopherstephenson8@gmail.com" class="btn-primary">Get in Touch</a>
